@@ -1,8 +1,13 @@
-import {ActionType, StateType} from "../state";
+import {ActionType} from "../DataTyping";
 
+type SidebarType = {}
+const initialState = {}
 
-export const profileReducer = (state: StateType,action: ActionType): StateType => {
+export const sidebarReducer = (state: SidebarType, action: ActionType): SidebarType => {
+   switch (action.type) {
 
+      default:
+         return state
+   }
 
-   return state
 }

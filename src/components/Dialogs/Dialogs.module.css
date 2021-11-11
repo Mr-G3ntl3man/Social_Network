@@ -1,14 +1,27 @@
 .dialogs {
     background-color: #6192fb;
+    width: 100%;
+    padding: 40px;
+}
+
+.dialogs__name {
+    padding: 10px;
+}
+
+.dialogs__mess {
+    padding: 10px;
+}
+
+.dialogs__person {
+
+}
+
+.dialogsControl {
     display: flex;
+    align-items: center;
 }
 
-.dialogs__name{
-    padding: 10px;
-}
-.dialogs__mess{
-    padding: 10px;
-}
-.dialogs__person{
-
+.dialogsContent {
+    display: flex;
+    
 }

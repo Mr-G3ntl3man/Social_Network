@@ -1,45 +1,36 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
+import {DialogMess} from "./Message/Message";
+import {DialogPerson} from "./DialogItem/DialogItem";
+import {DialogsPropsType} from "./DialogsContainer";
 
 
-const DialogPerson:  React.FC<{name:string, id: string}> = (props) => {
-   return(
-      <div className={s.dialogs__person}>
-         <NavLink to={`/dialogs/${props.id}`}>{props.name}</NavLink>
-      </div>
-   )
-}
+export const Dialogs: React.FC<DialogsPropsType> = (props) => {
+   const messages = props.dialogsPage.messages.map(el => <DialogMess key={el.id} message={`${el.message}`}/>)
+   const dialogs = props.dialogsPage.dialogs.map(el => <DialogPerson name={`${el.name}`} id={`${el.id}`} key={el.id}/>)
 
-const DialogMess: React.FC<{message: string}> = (props) => {
-   return(
-      <div className={s.dialogs__content}>{props.message}</div>
-   )
-}
+   const onChangeTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => props.changeText(e.currentTarget.value)
 
-export const Dialogs = () => {
-   const dialogData = [
-      {id: 1, name: 'Name1'},
-      {id: 2, name: 'Name2'},
-      {id: 3, name: 'Name3'},
-      {id: 4, name: 'Name5'},
-   ]
+   const onClickAddMessHandler = () => props.addMessage()
 
-   const messageData = [
-      {id: 1, message: 'lorem Yo'},
-      {id: 2, message: 'lorem Yo'},
-      {id: 3, message: 'lorem Yo'},
-      {id: 4, message: 'lorem Yo'},
-   ]
 
-   return(
+   return (
       <div className={s.dialogs}>
+         <div className={s.dialogsControl}>
+            <textarea onChange={onChangeTextHandler} value={props.dialogsPage.newMessage}> </textarea>
+            <button onClick={onClickAddMessHandler}>+</button>
+         </div>
+
+         <div className={s.dialogsContent}>
             <div className={s.dialogs__name}>
-               {dialogData.map(el => <DialogPerson name={`${el.name}`} id={`${el.id}`}/>)}
+               {dialogs}
             </div>
             <div className={s.dialogs__mess}>
-               {messageData.map(el => <DialogMess message={`${el.message}`}/>)}
+               {messages}
             </div>
+         </div>
+
       </div>
    )
 }
+

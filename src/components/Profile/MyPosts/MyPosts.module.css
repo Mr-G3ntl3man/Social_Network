@@ -1,3 +1,41 @@
-.main{
-    background-color: chocolate;
+.main {
+
+    margin: 40px;
+}
+
+.main h3 {
+    font-size: 30px;
+}
+
+.addPost {
+    display: flex;
+    align-items: center;
+}
+
+.textFieldWrap {
+    width: 100%;
+}
+
+.addPostBtn {
+    display: block;
+    height: 40px;
+    width: 100px;
+    margin-left: 20px;
+}
+
+.textFieldWrap input {
+    height: 50px;
+    font-size: 20px;
+}
+
+.btnWrap {
+    margin: 0 50px;
+}
+
+.btnWrap button {
+    background-color: green;
+    height: 60px;
+    width: 200px;
+    font-size: 20px;
+
 }

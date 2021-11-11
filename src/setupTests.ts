@@ -3,3 +3,9 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
+
+
+export const sum = (salary: number, a: number) => salary + a
+export const sum2 = (salary: number, a: number) => salary - a
+export const sum3 = (salary: number, a: number) => salary * a
+export const sum4 = (salary: number, a: number) => salary / a
