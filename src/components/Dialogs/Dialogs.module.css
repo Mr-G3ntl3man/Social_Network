@@ -1,0 +1,14 @@
+.dialogs {
+    background-color: #6192fb;
+    display: flex;
+}
+
+.dialogs__name{
+    padding: 10px;
+}
+.dialogs__mess{
+    padding: 10px;
+}
+.dialogs__person{
+
+}
