@@ -1,8 +1,9 @@
 import React from "react";
 import s from './ProfileInfo.module.css'
-import {MapStateToPropsType} from "../ProfileContainer";
+import {ProfileContainerType} from "../ProfileContainer";
+import {ProfileStatus} from "./ProfileStatus";
 
-export const ProfileInfo: React.FC<MapStateToPropsType> = (props) => {
+export const ProfileInfo: React.FC<ProfileContainerType> = (props) => {
    const defaultAvatar = (src: string | null | undefined) => src ? src : 'https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png'
 
    if (!props.profile) {
@@ -20,6 +21,8 @@ export const ProfileInfo: React.FC<MapStateToPropsType> = (props) => {
             </div>
 
             <div className={s.profileInfo}>
+               <ProfileStatus updateStatus={props.updateStatus} status={props.status}/>
+
                <div className={s.profileAbout}>
                <span
                   className={s.fullName}>Full name: <span

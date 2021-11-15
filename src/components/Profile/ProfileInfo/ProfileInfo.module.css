@@ -142,3 +142,33 @@
     font-weight: 400;
     font-size: 20px;
 }
+
+
+.statusUser {
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-family: 'Mochiy Pop P One', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+.status {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.editBlock span {
+    cursor: pointer;
+
+}
+
+.editBlock input {
+    font-size: 19px;
+
+
+}
+
+
+.editBlock {
+    height: 30px;
+}

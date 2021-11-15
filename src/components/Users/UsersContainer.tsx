@@ -2,8 +2,7 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
    followSuccess,
-   getUsers,
-   setCurrentPage, setSettingsOfPages,
+   getUsers, setSettingsOfPages,
    showUsersPageNum, toggleFollowingProgress, unFollowSuccess,
    UsersType
 } from "../../redux/reducer/users-reducer";
@@ -12,7 +11,8 @@ import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {PagesNumber} from "./Pages";
 import s from "./user.module.css";
-import {WithAuthRedirect} from "../Hoc/WithAuthRedirect";
+import {compose} from "redux";
+import {getUserPage} from "../../redux/selectors/user-selectors";
 
 
 class UsersPageApiComponent extends React.Component<UsersPropsType> {
@@ -56,48 +56,22 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
    followSuccess: (userId: number) => void
    unFollowSuccess: (userId: number) => void
-   setCurrentPage: (page: number) => void
    showUsersPageNum: (value: number) => void
    setSettingsOfPages: (startPage: number, lastPage: number) => void
    toggleFollowingProgress: (following: boolean, userId: number) => void
    getUsers: (currentPage: number, pageSize: number) => void
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-   return {
-      userPage: state.usersPage
-   }
-}
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+   userPage: getUserPage(state)
+})
 
-// const mapDispatchToProps = (dispatch: Dispatch | any): MapDispatchToPropsType => {
-//    return {
-//       followSuccess(userId: number) {
-//          dispatch(followSuccess(userId))
-//       },
-//       unFollowSuccess(userId: number) {
-//          dispatch(unFollowSuccess(userId))
-//       },
-//       setCurrentPage(page) {
-//          dispatch(setCurrentPage(page))
-//       },
-//       showUsers(value) {
-//          dispatch(showUsersPageNum(value))
-//       },
-//       setSettingsOfPages(startPage, lastPage) {
-//          dispatch(setSettingsOfPages(startPage, lastPage))
-//       },
-//       toggleFollowingProgress(following: boolean, userId: number) {
-//          dispatch(toggleFollowingProgress(following, userId))
-//       },
-//       getUser(currentPage: number, pageSize: number) {
-//          dispatch(getUsers(currentPage, pageSize))
-//       }
-//    }
-// }
 
-const withRedirect = WithAuthRedirect(UsersPageApiComponent)
+export const UsersContainer = compose(
+   connect(mapStateToProps, {
+      followSuccess, unFollowSuccess, showUsersPageNum,
+      setSettingsOfPages, toggleFollowingProgress, getUsers
+   })
+)(UsersPageApiComponent)
 
-export const UsersContainer = connect(mapStateToProps, {
-   followSuccess, unFollowSuccess, setCurrentPage, showUsersPageNum,
-   setSettingsOfPages, toggleFollowingProgress, getUsers
-})(withRedirect)
+

@@ -52,4 +52,5 @@ ul {
 
 .flexItemRight {
     flex: 0 0 85%;
+    /*height: 100%;*/
 }

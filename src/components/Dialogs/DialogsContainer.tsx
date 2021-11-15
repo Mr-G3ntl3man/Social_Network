@@ -3,8 +3,9 @@ import {Dialogs} from "./Dialogs";
 import {DialogsPageType} from "../../redux/DataTyping";
 import {addMessageAC, changeMessageAC} from "../../redux/reducer/dialog-reducer";
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {WithAuthRedirect} from "../Hoc/WithAuthRedirect";
+import {getDialogPage} from "../../redux/selectors/dialog-selector";
 
 
 type MapStateToPropsType = {
@@ -19,7 +20,7 @@ export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
    return {
-      dialogsPage: state.dialogsPage,
+      dialogsPage: getDialogPage(state)
    }
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
@@ -34,6 +35,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
    }
 }
 
-const withRedirect = WithAuthRedirect(Dialogs)
+export const DialogsContainer = compose(
+   connect(mapStateToProps, mapDispatchToProps)
+)(WithAuthRedirect(Dialogs))
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(withRedirect)

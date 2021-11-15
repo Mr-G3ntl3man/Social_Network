@@ -61,12 +61,12 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                <div className={s.userContent}>
                   <div className={s.userInfo}>
                      <span className={s.userName}>{el.name}</span>
-                     <p className={s.userStatus}>{el.status ? el.status : 'No status specified'}</p>
+                     <p className={s.userStatus}>{el.status || 'No status specified'}</p>
                   </div>
                   <div className={s.userLocation}>
                    <span className={s.userCountry}>
-                     {el.location?.country ? el.location.country : 'Country not specified'}</span>
-                     <span className={s.userCity}>{el.location?.city ? el.location.city : 'City not specified'}</span>
+                     {el.location?.country || 'Country not specified'}</span>
+                     <span className={s.userCity}>{el.location?.city || 'City not specified'}</span>
                   </div>
                </div>
             </div>)

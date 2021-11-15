@@ -201,6 +201,7 @@ export const getUsers = (currentPage: number, pageSize: number): (dispatch: Disp
 
    return (dispatch: Dispatch) => {
       dispatch(toggleIsFetchingAC(true))
+      dispatch(setCurrentPage(currentPage))
 
       usersAPI.getUsers(currentPage, pageSize)
          .then(data => {
