@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/Social_network_React_Redux/static/css/main.861fa2f2.chunk.css",
+    "main.js": "/Social_network_React_Redux/static/js/main.db88e83b.chunk.js",
+    "main.js.map": "/Social_network_React_Redux/static/js/main.db88e83b.chunk.js.map",
+    "runtime-main.js": "/Social_network_React_Redux/static/js/runtime-main.610af2a7.js",
+    "runtime-main.js.map": "/Social_network_React_Redux/static/js/runtime-main.610af2a7.js.map",
+    "static/css/2.2b8316e7.chunk.css": "/Social_network_React_Redux/static/css/2.2b8316e7.chunk.css",
+    "static/js/2.36f96ca5.chunk.js": "/Social_network_React_Redux/static/js/2.36f96ca5.chunk.js",
+    "static/js/2.36f96ca5.chunk.js.map": "/Social_network_React_Redux/static/js/2.36f96ca5.chunk.js.map",
+    "static/js/3.484afa50.chunk.js": "/Social_network_React_Redux/static/js/3.484afa50.chunk.js",
+    "static/js/3.484afa50.chunk.js.map": "/Social_network_React_Redux/static/js/3.484afa50.chunk.js.map",
+    "static/css/4.788254f8.chunk.css": "/Social_network_React_Redux/static/css/4.788254f8.chunk.css",
+    "static/js/4.f5eb83d2.chunk.js": "/Social_network_React_Redux/static/js/4.f5eb83d2.chunk.js",
+    "static/js/4.f5eb83d2.chunk.js.map": "/Social_network_React_Redux/static/js/4.f5eb83d2.chunk.js.map",
+    "static/css/5.23d5aea0.chunk.css": "/Social_network_React_Redux/static/css/5.23d5aea0.chunk.css",
+    "static/js/5.accf1784.chunk.js": "/Social_network_React_Redux/static/js/5.accf1784.chunk.js",
+    "static/js/5.accf1784.chunk.js.map": "/Social_network_React_Redux/static/js/5.accf1784.chunk.js.map",
+    "static/js/6.02873f97.chunk.js": "/Social_network_React_Redux/static/js/6.02873f97.chunk.js",
+    "static/js/6.02873f97.chunk.js.map": "/Social_network_React_Redux/static/js/6.02873f97.chunk.js.map",
+    "index.html": "/Social_network_React_Redux/index.html",
+    "static/css/2.2b8316e7.chunk.css.map": "/Social_network_React_Redux/static/css/2.2b8316e7.chunk.css.map",
+    "static/css/4.788254f8.chunk.css.map": "/Social_network_React_Redux/static/css/4.788254f8.chunk.css.map",
+    "static/css/5.23d5aea0.chunk.css.map": "/Social_network_React_Redux/static/css/5.23d5aea0.chunk.css.map",
+    "static/css/main.861fa2f2.chunk.css.map": "/Social_network_React_Redux/static/css/main.861fa2f2.chunk.css.map",
+    "static/js/2.36f96ca5.chunk.js.LICENSE.txt": "/Social_network_React_Redux/static/js/2.36f96ca5.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.610af2a7.js",
+    "static/css/2.2b8316e7.chunk.css",
+    "static/js/2.36f96ca5.chunk.js",
+    "static/css/main.861fa2f2.chunk.css",
+    "static/js/main.db88e83b.chunk.js"
+  ]
+}
