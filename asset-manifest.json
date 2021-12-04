@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Social_network_React_Redux/static/css/main.15668855.chunk.css",
+    "main.css": "/Social_network_React_Redux/static/css/main.1f17c393.chunk.css",
     "main.js": "/Social_network_React_Redux/static/js/main.c047b262.chunk.js",
     "main.js.map": "/Social_network_React_Redux/static/js/main.c047b262.chunk.js.map",
     "runtime-main.js": "/Social_network_React_Redux/static/js/runtime-main.610af2a7.js",
@@ -22,14 +22,15 @@
     "static/css/2.2b8316e7.chunk.css.map": "/Social_network_React_Redux/static/css/2.2b8316e7.chunk.css.map",
     "static/css/4.788254f8.chunk.css.map": "/Social_network_React_Redux/static/css/4.788254f8.chunk.css.map",
     "static/css/5.23d5aea0.chunk.css.map": "/Social_network_React_Redux/static/css/5.23d5aea0.chunk.css.map",
-    "static/css/main.15668855.chunk.css.map": "/Social_network_React_Redux/static/css/main.15668855.chunk.css.map",
-    "static/js/2.36f96ca5.chunk.js.LICENSE.txt": "/Social_network_React_Redux/static/js/2.36f96ca5.chunk.js.LICENSE.txt"
+    "static/css/main.1f17c393.chunk.css.map": "/Social_network_React_Redux/static/css/main.1f17c393.chunk.css.map",
+    "static/js/2.36f96ca5.chunk.js.LICENSE.txt": "/Social_network_React_Redux/static/js/2.36f96ca5.chunk.js.LICENSE.txt",
+    "static/media/ProfileInfo.module.scss": "/Social_network_React_Redux/static/media/youtube3.a18905bd.png"
   },
   "entrypoints": [
     "static/js/runtime-main.610af2a7.js",
     "static/css/2.2b8316e7.chunk.css",
     "static/js/2.36f96ca5.chunk.js",
-    "static/css/main.15668855.chunk.css",
+    "static/css/main.1f17c393.chunk.css",
     "static/js/main.c047b262.chunk.js"
   ]
 }
