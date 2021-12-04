@@ -2,17 +2,17 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
    followSuccess,
-   getUsers, setSettingsOfPages,
-   showUsersPageNum, toggleFollowingProgress, unFollowSuccess,
+   getUsers, setPageSize,
+   toggleFollowingProgress, unFollowSuccess,
    UsersType
 } from "../../redux/reducer/users-reducer";
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
-import {PagesNumber} from "./Pages";
 import s from "./user.module.css";
 import {compose} from "redux";
 import {getUserPage} from "../../redux/selectors/user-selectors";
+import {Pagination} from 'antd';
 
 
 class UsersPageApiComponent extends React.Component<UsersPropsType> {
@@ -20,8 +20,10 @@ class UsersPageApiComponent extends React.Component<UsersPropsType> {
       this.props.getUsers(this.props.userPage.currentPage, this.props.userPage.pageSize)
    }
 
-   onClickSetPageHandler = (page: number) => {
-      this.props.getUsers(page, this.props.userPage.pageSize)
+   onChangeCurrentPage = (page: number, pageSize: number) => {
+      if (page === 0) page = 1
+
+      this.props.getUsers(page, pageSize)
    }
 
    render() {
@@ -29,11 +31,11 @@ class UsersPageApiComponent extends React.Component<UsersPropsType> {
          <div className={s.usersMainWrap}>
             {this.props.userPage.isFetching && <Preloader/>}
 
-            <PagesNumber
-               setPages={this.props.setSettingsOfPages}
-               onClickShowUsersPage={this.props.showUsersPageNum}
-               onClickSetPageHandler={this.onClickSetPageHandler}
-               userPage={this.props.userPage}/>
+            <Pagination
+               onChange={this.onChangeCurrentPage}
+               defaultCurrent={1}
+               defaultPageSize={this.props.userPage.pageSize}
+               total={this.props.userPage.totalUserCount}/>
 
             <Users
                userPage={this.props.userPage}
@@ -46,7 +48,6 @@ class UsersPageApiComponent extends React.Component<UsersPropsType> {
    }
 }
 
-
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 type MapStateToPropsType = {
@@ -56,8 +57,6 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
    followSuccess: (userId: number) => void
    unFollowSuccess: (userId: number) => void
-   showUsersPageNum: (value: number) => void
-   setSettingsOfPages: (startPage: number, lastPage: number) => void
    toggleFollowingProgress: (following: boolean, userId: number) => void
    getUsers: (currentPage: number, pageSize: number) => void
 }
@@ -69,9 +68,10 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 
 export const UsersContainer = compose(
    connect(mapStateToProps, {
-      followSuccess, unFollowSuccess, showUsersPageNum,
-      setSettingsOfPages, toggleFollowingProgress, getUsers
+      followSuccess, unFollowSuccess,
+      toggleFollowingProgress, getUsers, setPageSize
    })
 )(UsersPageApiComponent)
 
 
+export default UsersContainer

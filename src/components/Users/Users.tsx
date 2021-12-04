@@ -3,6 +3,7 @@ import s from "./user.module.css";
 import {UsersType} from "../../redux/reducer/users-reducer";
 import {NavLink} from "react-router-dom";
 import {Button} from "@material-ui/core";
+import {Paper} from "@mui/material";
 
 
 type UsersPropsType = {
@@ -14,13 +15,6 @@ type UsersPropsType = {
 export const Users: React.FC<UsersPropsType> = (props) => {
    const defaultAvatar = (src: string | null) => src ? src : 'https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png'
 
-   const pagesCount = Math.ceil(props.userPage.totalUserCount / props.userPage.pageSize)
-
-   const pages = []
-
-   for (let i = 1; i <= pagesCount; i++) {
-      pages.push(i)
-   }
    const finalClassName = props.userPage.isFetching ? `${s.userMain} ${s.fetching}` : s.userMain
 
    const onClickUnFollowHandler = (id: number) => {
@@ -59,18 +53,27 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                </div>
 
                <div className={s.userContent}>
-                  <div className={s.userInfo}>
-                     <span className={s.userName}>{el.name}</span>
-                     <p className={s.userStatus}>{el.status || 'No status specified'}</p>
-                  </div>
-                  <div className={s.userLocation}>
+                  <Paper style={{
+                     width: '100%',
+                     padding: '20px',
+                     display: 'flex',
+                     justifyContent: 'space-between'
+                  }} elevation={8}>
+                     <div className={s.userInfo}>
+                        <span className={s.userName}>{el.name}</span>
+                        <p className={s.userStatus}>{el.status || 'No status specified'}</p>
+                     </div>
+                     <div className={s.userLocation}>
                    <span className={s.userCountry}>
                      {el.location?.country || 'Country not specified'}</span>
-                     <span className={s.userCity}>{el.location?.city || 'City not specified'}</span>
-                  </div>
+                        <span className={s.userCity}>{el.location?.city || 'City not specified'}</span>
+                     </div>
+                  </Paper>
                </div>
             </div>)
          }
+
       </div>
+
    )
 }

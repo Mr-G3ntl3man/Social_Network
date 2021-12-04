@@ -1,7 +1,6 @@
 import {connect} from "react-redux";
 import {Dialogs} from "./Dialogs";
-import {DialogsPageType} from "../../redux/DataTyping";
-import {addMessageAC, changeMessageAC} from "../../redux/reducer/dialog-reducer";
+import {addMessageAC, changeMessageAC, DialogsPageType} from "../../redux/reducer/dialog-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {compose, Dispatch} from "redux";
 import {WithAuthRedirect} from "../Hoc/WithAuthRedirect";
@@ -39,3 +38,4 @@ export const DialogsContainer = compose(
    connect(mapStateToProps, mapDispatchToProps)
 )(WithAuthRedirect(Dialogs))
 
+export default DialogsContainer

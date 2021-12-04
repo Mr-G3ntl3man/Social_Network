@@ -1,31 +1,57 @@
-import {Button} from "@material-ui/core";
+import {Button, makeStyles} from "@material-ui/core";
 import React from "react";
-import {NavLink} from "react-router-dom";
-import s from './Header.module.css'
-import {HeaderContainerType} from "./HeaderContainer";
+import {useNavigate} from "react-router-dom";
+import s from './Header.module.scss'
+import {Avatar, Layout} from "antd";
+import {useDispatch, useSelector} from "react-redux";
+import {AuthStateType, logout} from "../../redux/reducer/auth-reducer";
+import {AppStateType} from "../../redux/redux-store";
+import {PhotoType} from "../../redux/reducer/profile-reducer";
 
-export const Header: React.FC<HeaderContainerType> = (props) => {
+
+export const Header: React.FC = (props) => {
+   const navigate = useNavigate()
+
+   const dispatch = useDispatch()
+
+   const authDate = useSelector<AppStateType, AuthStateType>(state => state.auth)
+
+   const avatar = useSelector<AppStateType, PhotoType | null>(state => state.auth.photo)
+
+   const onClickHandlerLogout = () => {
+      dispatch(logout())
+      navigate('/')
+   }
+
+   const onClickHandlerLogin = () => navigate('/login')
+
+   const style = makeStyles(() => ({
+      default: {
+         marginLeft: '20px',
+         fontFamily: `Mochiy Pop P One, sans-serif`
+      }
+   }))
+
    return (
-      <header className={s.header}>
-         <span className={s.logo}><img
-            src={'https://c4.wallpaperflare.com/wallpaper/891/59/630/fsociety-mr-robot-logo-4k-wallpaper-preview.jpg'}
-            alt={'logo'}/></span>
+      <Layout.Header className={s.header}>
+         <Avatar src={avatar?.small} size={'large'}/>
 
-         {props.authDate.userData?.login
+         {authDate.userData?.login
             ? <div className={s.loginBlock}>
-               {props.authDate.userData?.login}
+               Welcome {authDate.userData?.login}
                <Button
-                  style={{
-                     marginLeft: '20px',
-                     fontFamily: `Mochiy Pop P One, sans-serif`
-                  }}
-                  onClick={props.logout}
+                  className={style().default}
+                  onClick={onClickHandlerLogout}
                   variant={"contained"}
                   color="primary">Logout</Button>
             </div>
             : <div className={s.loginBlock}>
-               <NavLink to={'/Login'}>Login</NavLink>
+               <Button
+                  className={style().default}
+                  onClick={onClickHandlerLogin}
+                  variant={"contained"}
+                  color="primary">Login</Button>
             </div>}
-      </header>
+      </Layout.Header>
    )
 }

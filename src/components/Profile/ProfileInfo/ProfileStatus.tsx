@@ -1,68 +1,65 @@
 import {TextField} from "@material-ui/core";
-import React, {ChangeEvent} from "react";
-import s from './ProfileInfo.module.css'
+import React, {ChangeEvent, useEffect, useState} from "react";
+import s from './ProfileInfo.module.scss'
+import {installCaughtError} from "../../../redux/reducer/app-reducer";
+import {useDispatch} from "react-redux";
 
 
 type ProfileStatusType = {
    status: string
    updateStatus: (status: string) => void
 }
+
 type StateType = {
    editMode: boolean
    status: string
 
 }
 
+export const ProfileStatus: React.FC<ProfileStatusType> = (props) => {
+   const {status, updateStatus} = props
 
-export class ProfileStatus extends React.Component<ProfileStatusType, StateType> {
-   state: StateType = {
+   const [state, setState] = useState<StateType>({
       editMode: false,
-      status: this.props.status,
+      status: status,
+   })
 
+   useEffect(() => {
+      setState(state => ({...state, status: status}))
+   }, [status])
+
+
+   const onActivateEditMode = () => {
+      setState(state => ({...state, editMode: true}))
    }
 
-   componentDidUpdate(prevProps: Readonly<ProfileStatusType>, prevState: Readonly<StateType>) {
-      prevProps.status !== this.props.status && this.setState({status: this.props.status})
+   const offActivateEditMode = () => {
+      setState(state => ({...state, editMode: false}))
+      updateStatus(state.status)
    }
 
-
-   onActivateEditMode = () => {
-      this.setState({
-         editMode: true
-      })
+   const onChangeStatusInput = (e: ChangeEvent<HTMLInputElement>) => {
+      e.target.value.length < 310 && setState(state => ({...state, status: e.target.value}))
    }
 
-   offActivateEditMode = () => {
-      this.setState({
-         editMode: false
-      })
-      this.props.updateStatus(this.state.status)
-   }
-
-   onChangeStatusInput = (e: ChangeEvent<HTMLInputElement>) => {
-      this.setState({
-         status: e.currentTarget.value
-      })
-   }
-
-   render() {
-      return (
-         <div className={s.statusUser}>
-            <span className={s.status}>Status: </span>
-
-            {this.state.editMode
-               ? <div className={s.editBlock}>
-                  <TextField autoFocus
-                             onBlur={this.offActivateEditMode}
-                             onChange={this.onChangeStatusInput}
-                             value={this.state.status}/>
-               </div>
-               : <div className={s.editBlock}>
-                  <span onClick={this.onActivateEditMode}> {this.state.status || 'No status specified'}</span>
-               </div>}
-         </div>
-      )
-   }
-
-
+   return (
+      <div className={s.statusUser}>
+         Status:
+         {state.editMode
+            ? <span className={s.editBlock}>
+               <TextField autoFocus
+                          multiline
+                          minRows={1}
+                          maxRows={15}
+                          fullWidth
+                          onBlur={offActivateEditMode}
+                          onChange={onChangeStatusInput}
+                          value={state.status}/>
+            </span>
+            : <span className={s.editBlock}>
+               <span className={s.stateStatus}
+                     onClick={onActivateEditMode}> {state.status || 'No status specified'}</span>
+            </span>}
+      </div>
+   )
 }

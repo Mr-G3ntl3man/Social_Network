@@ -1,0 +1,56 @@
+.header {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media (max-width: 750px) {
+    position: fixed !important;
+    width: 100%;
+    z-index: 100;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 10px !important;
+  }
+}
+
+.logo {
+  display: inline-block;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.loginBlock {
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  color: white;
+  margin-left: auto;
+  font-size: 20px;
+  font-family: 'Mochiy Pop P One', sans-serif;
+  @media (max-width: 600px) {
+    font-size: 15px;
+    button {
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 450px) {
+    font-size: 11px;
+    letter-spacing: 1px;
+    button {
+      font-size: 10px;
+    }
+  }
+}
+

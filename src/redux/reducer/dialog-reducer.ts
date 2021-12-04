@@ -1,29 +1,44 @@
-import {ACTION_TYPE, ActionType, DialogsPageType} from "../DataTyping";
+import {v1} from "uuid";
+
+enum ACTION_TYPE_DIALOGS {
+   ADD_MESSAGE = 'ADD_MESSAGE',
+   UPDATE_NEW_MESSAGE = 'UPDATE_NEW_MESSAGE'
+}
+
+type ActionType = ReturnType<typeof changeMessageAC> | ReturnType<typeof addMessageAC>
+
+export type DialogsPageType = {
+   dialogs: Array<DialogsType>
+   messages: Array<MessagesType>
+   newMessage: string
+}
+type DialogsType = {
+   id: string
+   name: string
+}
+type MessagesType = {
+   id: string
+   message: string
+}
 
 const initialState: DialogsPageType = {
    dialogs: [
-      {id: 1, name: 'Name1'},
-      {id: 2, name: 'Name2'},
-      {id: 3, name: 'Name3'},
-      {id: 4, name: 'Name5'},
+      {id: v1(), name: 'Name1'},
    ],
    messages: [
-      {id: 1, message: 'lorem Yo1'},
-      {id: 2, message: 'lorem Yo2'},
-      {id: 3, message: 'lorem Yo3'},
-      {id: 4, message: 'lorem Yo4'},
+      {id: v1(), message: 'lorem Yo1'},
    ],
    newMessage: ''
 }
 
 export const dialogReducer = (state = initialState, action: ActionType): DialogsPageType => {
    switch (action.type) {
-      case ACTION_TYPE.UPDATE_NEW_MESSAGE:
+      case ACTION_TYPE_DIALOGS.UPDATE_NEW_MESSAGE:
 
          return {...state, newMessage: action.newMessage}
 
-      case ACTION_TYPE.ADD_MESSAGE:
-         const newMess = {id: 6, message: state.newMessage}
+      case ACTION_TYPE_DIALOGS.ADD_MESSAGE:
+         const newMess = {id: v1(), message: state.newMessage}
 
          return {...state, messages: [...state.messages, newMess], newMessage: ''}
 
@@ -34,13 +49,13 @@ export const dialogReducer = (state = initialState, action: ActionType): Dialogs
 
 export const changeMessageAC = (newMessage: string) => {
    return {
-      type: ACTION_TYPE.UPDATE_NEW_MESSAGE,
+      type: ACTION_TYPE_DIALOGS.UPDATE_NEW_MESSAGE,
       newMessage: newMessage
    } as const
 }
 
 export const addMessageAC = () => {
    return {
-      type: ACTION_TYPE.ADD_MESSAGE,
+      type: ACTION_TYPE_DIALOGS.ADD_MESSAGE,
    } as const
 }

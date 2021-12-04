@@ -1,0 +1,316 @@
+.profileWrap {
+  width: 100%;
+  margin-bottom: 100px;
+  @media (max-width: 700px) {
+    margin-bottom: 30px;
+  }
+}
+
+.profileBackground {
+  display: block;
+  height: 200px;
+  margin-bottom: 15px;
+}
+
+.profileBackground img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.profileAvatar {
+  height: 300px;
+  width: 300px;
+  margin: 0 0 30px 0;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  @media (max-width: 550px) {
+    height: 200px;
+    width: 200px;
+  }
+}
+
+.profileAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profileContactList {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 10px;
+  @media (max-width: 550px) {
+    flex-wrap: wrap;
+  }
+}
+
+.profileContact {
+
+  text-align: center;
+}
+
+.profileContactItem {
+  margin: 0 10px;
+
+  @media (max-width: 550px) {
+    margin: 10px;
+  }
+}
+
+.profileDesc {
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 1400px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.defaultLink {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s linear;
+  transform: scale(1);
+}
+
+.defaultLink:hover {
+  transition: transform 0.3s linear;
+  transform: scale(1.2);
+}
+
+.linkFacebook {
+  background: url("https://cdn-icons.flaticon.com/png/512/3536/premium/3536394.png?token=exp=1636305354~hmac=0a8232c25a77130ed43eb9da5e1fa1c3") 0 0 / cover no-repeat;
+}
+
+.linkWebsite {
+  background: url("https://cdn-icons-png.flaticon.com/512/1786/1786115.png") 0 0 / cover no-repeat;
+}
+
+.linkVk {
+  background: url("https://cdn-icons.flaticon.com/png/512/3938/premium/3938067.png?token=exp=1636305802~hmac=91d0914970a1c213fa7275119ac68c4d") 0 0 / cover no-repeat;
+}
+
+.linkTwitter {
+  background: url("https://cdn-icons.flaticon.com/png/512/3536/premium/3536424.png?token=exp=1636305909~hmac=27890f6ccf2e7b9bba8cf32e11c12859") 0 0 / cover no-repeat;
+}
+
+.linkInstagram {
+  background: url("https://cdn-icons-png.flaticon.com/512/174/174855.png") 0 0 / cover no-repeat;
+}
+
+.linkYoutube {
+  background: url("https://cdn-icons.flaticon.com/png/512/3938/premium/3938026.png?token=exp=1636305998~hmac=5a7425199b9cda6f78d71a14b968d8bd") 0 0 / cover no-repeat;
+}
+
+.linkGithub {
+  background: url("https://cdn-icons.flaticon.com/png/512/3291/premium/3291695.png?token=exp=1636306027~hmac=11bbaf86e2faf7cd6ff263bee8256bb6") 0 0 / cover no-repeat;
+}
+
+.linkMainLink {
+  background: url("https://cdn-icons.flaticon.com/png/512/3316/premium/3316455.png?token=exp=1636306106~hmac=a76443d0b360dc7ce9c3e5d1bce8ec9f") 0 0 / cover no-repeat;
+}
+
+.linkNone {
+  pointer-events: none;
+  filter: grayscale(1);
+  transform: scale(1);
+}
+
+.contactTitle {
+  display: block;
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+
+.profileContent {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 20px;
+  padding: 0;
+  list-style: none;
+  @media (max-width: 550px) {
+    text-align: center;
+  }
+}
+
+.profileContent li {
+  font-size: 18px;
+  font-family: 'Mochiy Pop P One', sans-serif;
+  @media (max-width: 550px) {
+    font-size: 17px;
+  }
+}
+
+.profileContent li span {
+  margin-left: 10px;
+  font-family: 'Open Sans', sans-serif;
+  @media (max-width: 550px) {
+    font-size: 18px;
+    display: block;
+  }
+}
+
+.profileAbout {
+  font-weight: 500;
+  font-size: 21px;
+}
+
+.profileInfo {
+  flex: 0 0 70%;
+  padding: 0 100px 0 0;
+
+  @media (max-width: 1400px) {
+    flex: 0 0 100%;
+    padding: 0;
+  }
+}
+
+.aboutMe {
+  margin-bottom: 10px;
+}
+
+
+.fullName {
+  margin-bottom: 10px;
+}
+
+.lookingForAJob {
+  margin-bottom: 10px;
+}
+
+.lookingForAJobDescription {
+  margin-bottom: 10px;
+}
+
+.spanDefault {
+  font-size: 20px;
+}
+
+
+.statusUser {
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-family: 'Mochiy Pop P One', sans-serif;
+  @media (max-width: 550px) {
+    text-align: center;
+  }
+
+  span {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+  }
+}
+
+.status {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.editBlock span {
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  @media (max-width: 550px) {
+    display: block;
+  }
+}
+
+.editBlock input {
+  font-size: 19px;
+}
+
+.editBlock {
+  width: 100%;
+}
+
+.profileEditForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileEditWrap {
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+
+  }
+}
+
+.profileEditInfo {
+  flex: 0 0 30%;
+  @media (max-width: 1000px) {
+    flex: 0 0 100%;
+  }
+}
+
+.profileEditContact {
+  flex: 0 0 65%;
+
+  @media (max-width: 1000px) {
+    flex: 0 0 100%;
+  }
+}
+
+.profileEditContactWrap {
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: 1000px) {
+    margin-bottom: 20px;
+  }
+  @media (max-width: 750px) {
+    flex-direction: column;
+  }
+
+}
+
+.profileEditContactLeft {
+  flex: 0 0 47%;
+}
+
+.profileEditContactRight {
+  flex: 0 0 47%;
+}
+
+.profileEditContactDesc, .profileEditInfoDesc {
+  font-family: 'Mochiy Pop P One', sans-serif
+}
+
+
+.contactsWrap {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 60%;
+  @media (max-width: 1400px) {
+    width: 100%;
+  }
+}
+
+.flexLeft {
+  flex: 0 0 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: 1400px) {
+    flex: 0 0 100%;
+    margin-bottom: 50px;
+  }
+}
+
+

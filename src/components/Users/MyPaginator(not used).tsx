@@ -3,17 +3,17 @@ import s from "./user.module.css";
 import {UsersType} from "../../redux/reducer/users-reducer";
 
 type PagesPropsType = {
-   onClickShowUsersPage: (value: number) => void
    onClickSetPageHandler: (page: number) => void
    setPages: (startPage: number, lastPage: number) => void
    userPage: UsersType
+   settingsNumberOfPages: any;
 }
 
 export const PagesNumber: React.FC<PagesPropsType> = (props) => {
    let pages: number[] = []
 
-   for (let i = props.userPage.settingsNumberOfPages.startPage;
-        i <= props.userPage.settingsNumberOfPages.lastPage; i++) {
+   for (let i = props.settingsNumberOfPages.startPage;
+        i <= props.settingsNumberOfPages.lastPage; i++) {
       pages.push(i)
    }
 
@@ -22,8 +22,8 @@ export const PagesNumber: React.FC<PagesPropsType> = (props) => {
 
       if (page - pageProgress < 1) {
          props.setPages(1, 10)
-      } else if (page + pageProgress > props.userPage.settingsNumberOfPages.totalPage) {
-         props.setPages(props.userPage.settingsNumberOfPages.totalPage - 10, props.userPage.settingsNumberOfPages.totalPage)
+      } else if (page + pageProgress > props.settingsNumberOfPages.totalPage) {
+         props.setPages(props.settingsNumberOfPages.totalPage - 10, props.settingsNumberOfPages.totalPage)
       } else {
          props.setPages(page - pageProgress, page + pageProgress)
       }
@@ -32,8 +32,8 @@ export const PagesNumber: React.FC<PagesPropsType> = (props) => {
    }
 
    const onClickGoTotalPage = () => {
-      props.setPages(props.userPage.settingsNumberOfPages.totalPage - 10, props.userPage.settingsNumberOfPages.totalPage)
-      props.onClickSetPageHandler(props.userPage.settingsNumberOfPages.totalPage)
+      props.setPages(props.settingsNumberOfPages.totalPage - 10, props.settingsNumberOfPages.totalPage)
+      props.onClickSetPageHandler(props.settingsNumberOfPages.totalPage)
    }
 
    const onClickGoToStartPage = () => {
@@ -46,7 +46,7 @@ export const PagesNumber: React.FC<PagesPropsType> = (props) => {
             <span className={s.page}> Start Page:
                <span onClick={onClickGoToStartPage}>{1} </span> </span>
             <span className={s.page}> Total Pages: <span
-               onClick={onClickGoTotalPage}>{props.userPage.settingsNumberOfPages.totalPage} </span> </span>
+               onClick={onClickGoTotalPage}>{props.settingsNumberOfPages.totalPage} </span> </span>
          </div>
 
          <div className={s.pageNumber}>

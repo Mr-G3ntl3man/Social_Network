@@ -10,10 +10,10 @@ import {
 } from "@material-ui/core";
 import * as yup from 'yup';
 import {yupResolver} from "@hookform/resolvers/yup";
-import {connect} from "react-redux";
-import {FormDataType, login, setStatusMessAC} from "../../redux/reducer/auth-reducer";
+import {connect, useSelector} from "react-redux";
+import {FormDataType, login, setStatusMessAC, UserDataType} from "../../redux/reducer/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
-import {Redirect} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from '@mui/material/Alert';
 
@@ -25,8 +25,11 @@ type MapDispatchToPropsType = {
 type LoginFormType = MapDispatchToPropsType & MapStateToPropsType
 
 export const LoginPage = (props: LoginFormType) => {
+   const authorizedUser = useSelector<AppStateType, UserDataType | null>(state => state.auth.userData)
+
+
    if (props.isAuth) {
-      return <Redirect to={'/profile'}/>
+      return <Navigate to={authorizedUser ? `/profile/${authorizedUser.id}` : '/login'}/>
    }
 
    return <LoginForm  {...props}/>
@@ -129,6 +132,26 @@ const LoginForm: React.FC<LoginFormType> = (props) => {
                   {...register("remember", {required: false})}/>
             } label={'Remember me?'}/>
 
+
+            {props.captchaUrl &&
+            <div style={{
+               marginBottom: '20px',
+               textAlign: 'center'
+            }}>
+               <img src={props.captchaUrl} alt="captcha"/>
+               <TextField
+                  required
+                  fullWidth
+                  size={'small'}
+                  helperText={errors.captcha?.message}
+                  error={!!errors.captcha}
+                  label={'Enter captcha'}
+                  margin={"normal"}
+                  variant={'outlined'}
+                  {...register('captcha', {required: true})} />
+            </div>
+            }
+
             <Button
                style={{
                   fontFamily: `Mochiy Pop P One, sans-serif`
@@ -147,12 +170,16 @@ type MapStateToPropsType = {
    isAuth: boolean
    statusMessages: string
    resultStatusMessage: boolean
+   captchaUrl: string | null
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
    isAuth: state.auth.isAuth,
    statusMessages: state.auth.statusMessages,
-   resultStatusMessage: state.auth.resultStatusMessage
+   resultStatusMessage: state.auth.resultStatusMessage,
+   captchaUrl: state.auth.captchaUrl
 })
 
 export const LoginFormContainer = connect(mapStateToProps, {login, setStatusMessAC})(LoginPage)
+
+export default LoginFormContainer
