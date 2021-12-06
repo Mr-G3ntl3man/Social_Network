@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {ThunkAction} from "redux-thunk";
+import {AppRootStateT} from "../redux-store";
 
 enum ACTION_TYPE_DIALOGS {
    ADD_MESSAGE = 'ADD_MESSAGE',
@@ -6,6 +8,8 @@ enum ACTION_TYPE_DIALOGS {
 }
 
 type ActionType = ReturnType<typeof changeMessageAC> | ReturnType<typeof addMessageAC>
+
+type ThunkActionT = ThunkAction<void, AppRootStateT, unknown, ActionType>
 
 export type DialogsPageType = {
    dialogs: Array<DialogsType>

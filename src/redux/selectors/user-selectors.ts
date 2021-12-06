@@ -1,3 +1,3 @@
-import {AppStateType} from "../redux-store";
+import {AppRootStateT} from "../redux-store";
 
-export const getUserPage = (state: AppStateType) => state.usersPage
+export const getUserPage = (state: AppRootStateT) => state.usersPage

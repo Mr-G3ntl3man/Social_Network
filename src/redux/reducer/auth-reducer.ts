@@ -2,6 +2,8 @@ import {Dispatch} from "redux";
 import {authAPI, profileAPI, securityApi} from "../../api/api";
 import {installCaughtError} from "./app-reducer";
 import {PhotoType} from "./profile-reducer";
+import {ThunkAction} from "redux-thunk";
+import {AppRootStateT} from "../redux-store";
 
 export enum ACTION_TYPE_AUTH {
    SET_USER_DATA = 'social_network/auth/SET_USER_DATA',
@@ -37,12 +39,14 @@ type ActionType = ReturnType<typeof setUserDataAC>
    | ReturnType<typeof getCaptchaUrlSuccess>
    | ReturnType<typeof setAuthorizedUserPhoto>
 
+type ThunkActionT = ThunkAction<void, AppRootStateT, unknown, ActionType>
+
 const initialState: AuthStateType = {
    userData: null,
    isAuth: false,
    photo: null,
    statusMessages: '',
-   resultStatusMessage: false,
+   resultStatusMessage: true,
    captchaUrl: null
 }
 
@@ -82,13 +86,19 @@ export const setStatusMessAC = (message: string, resultStatusMessage: boolean) =
    resultStatusMessage
 } as const)
 
-export const getUserData = (): (dispatch: Dispatch) => void => {
+export const getUserData = (): (dispatch: Dispatch<ActionType>) => void => {
    return async (dispatch) => {
       const response = await authAPI.getUserData()
-      response.resultCode === 0 && dispatch(setUserDataAC(response.data, true))
 
-      const authUserProfile = await profileAPI.getProfile(response.data.id)
-      dispatch(setAuthorizedUserPhoto(authUserProfile.photos))
+      if (response.resultCode === 0) {
+         dispatch(setUserDataAC(response.data, true))
+
+         const authUserProfile = await profileAPI.getProfile(response.data.id)
+         dispatch(setAuthorizedUserPhoto(authUserProfile.photos))
+      }
+
+      response.resultCode !== 0 && dispatch(setStatusMessAC(response.messages[0], false))
+
    }
 }
 
@@ -102,25 +112,23 @@ export const setAuthorizedUserPhoto = (photo: PhotoType) => ({
    photo
 } as const)
 
-export const login = (data: FormDataType): (dispatch: Dispatch | any) => void => {
+export const login = (data: FormDataType): ThunkActionT => {
    return async (dispatch) => {
       const response = await authAPI.login(data)
 
-      // получить профиль залогиненого юзера и загрузить фото
-      // console.log(response)
-
       response.resultCode !== 0 && dispatch(setStatusMessAC(response.messages[0], false))
-      response.resultCode === 10 && dispatch(getCaptchaUrl())
+      response.resultCode === 10 && await dispatch(getCaptchaUrl())
 
       if (response.resultCode === 0) {
-         dispatch(getUserData())
          dispatch(setStatusMessAC('Successful login', true))
+
+         dispatch(getUserData())
       }
    }
 }
 
-export const logout = () => {
-   return async (dispatch: Dispatch | any) => {
+export const logout = (): ThunkActionT => {
+   return async (dispatch) => {
       const response = await authAPI.logout()
 
       response.data.resultCode === 0 && dispatch(setUserDataAC(null, false))
@@ -128,7 +136,7 @@ export const logout = () => {
    }
 }
 
-export const getCaptchaUrl = () => async (dispatch: Dispatch) => {
+export const getCaptchaUrl = () => async (dispatch: Dispatch<ActionType>) => {
    const response = await securityApi.getCaptchaUrl()
 
    dispatch(getCaptchaUrlSuccess(response.data.url))

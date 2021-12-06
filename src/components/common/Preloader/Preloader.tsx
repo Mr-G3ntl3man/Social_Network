@@ -5,39 +5,38 @@ import s from './preloader.module.css'
 export const Preloader = () => {
    return (
       <div className={s.preloader}>
-         <svg xmlns="http://www.w3.org/2000/svg"
-              width="300px" height="300px"
-              viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+         <svg xmlns="http://www.w3.org/2000/svg" width="300px" height="300px" viewBox="0 0 100 100"
+              preserveAspectRatio="xMidYMid">
             <g transform="translate(50 50)">
                <g transform="scale(1 -1)">
                   <g transform="translate(-50 -50)">
                      <g>
                         <animateTransform attributeName="transform" type="rotate" values="-2 50 50;359 50 50"
-                                          keyTimes="0;1" dur="1.3513513513513513s" repeatCount="indefinite"
-                                          calcMode="spline" keySplines="0.5 0 0.5 1"></animateTransform>
+                                          keyTimes="0;1" dur="1s" repeatCount="indefinite" calcMode="spline"
+                                          keySplines="0.5 0 0.5 1"></animateTransform>
                         <circle cx="50" cy="50" r="39.891" stroke="#ffffff" stroke-width="14.4" fill="none"
                                 stroke-dasharray="0 300">
                            <animate attributeName="stroke-dasharray" values="10 300;60.15421082128821 300;4 300"
-                                    keyTimes="0;0.5;1" dur="1.3513513513513513s" repeatCount="indefinite"
-                                    calcMode="linear" keySplines="0 1 1 0;0 1 1 0"></animate>
+                                    keyTimes="0;0.5;1" dur="1s" repeatCount="indefinite" calcMode="linear"
+                                    keySplines="0 1 1 0;0 1 1 0"></animate>
                         </circle>
                         <circle cx="50" cy="50" r="39.891" stroke="#ffffff" stroke-width="7.2" fill="none"
                                 stroke-dasharray="0 300">
                            <animate attributeName="stroke-dasharray" values="10 300;60.15421082128821 300;4 300"
-                                    keyTimes="0;0.5;1" dur="1.3513513513513513s" repeatCount="indefinite"
-                                    calcMode="linear" keySplines="0 1 1 0;0 1 1 0"></animate>
+                                    keyTimes="0;0.5;1" dur="1s" repeatCount="indefinite" calcMode="linear"
+                                    keySplines="0 1 1 0;0 1 1 0"></animate>
                         </circle>
                         <circle cx="50" cy="50" r="32.771" stroke="#0a0a0a" stroke-width="1" fill="none"
                                 stroke-dasharray="0 300">
                            <animate attributeName="stroke-dasharray" values="10 300;49.41750376837973 300;4 300"
-                                    keyTimes="0;0.5;1" dur="1.3513513513513513s" repeatCount="indefinite"
-                                    calcMode="linear" keySplines="0 1 1 0;0 1 1 0"></animate>
+                                    keyTimes="0;0.5;1" dur="1s" repeatCount="indefinite" calcMode="linear"
+                                    keySplines="0 1 1 0;0 1 1 0"></animate>
                         </circle>
                         <circle cx="50" cy="50" r="47.171" stroke="#0a0a0a" stroke-width="1" fill="none"
                                 stroke-dasharray="0 300">
                            <animate attributeName="stroke-dasharray" values="10 300;72.03697087422624 300;4 300"
-                                    keyTimes="0;0.5;1" dur="1.3513513513513513s" repeatCount="indefinite"
-                                    calcMode="linear" keySplines="0 1 1 0;0 1 1 0"></animate>
+                                    keyTimes="0;0.5;1" dur="1s" repeatCount="indefinite" calcMode="linear"
+                                    keySplines="0 1 1 0;0 1 1 0"></animate>
                         </circle>
                      </g>
                   </g>
@@ -45,7 +44,7 @@ export const Preloader = () => {
             </g>
             <g>
                <animateTransform attributeName="transform" type="rotate" values="360 50 50;0 50 50" keyTimes="0;1"
-                                 dur="1.3513513513513513s" repeatCount="indefinite" calcMode="spline"
+                                 dur="1s" repeatCount="indefinite" calcMode="spline"
                                  keySplines="0.5 0 0.5 1"></animateTransform>
                <path fill="#ffffff" stroke="#0a0a0a"
                      d="M82.8,50c0,0.9,0.7,2.6,1.8,3.7c0.3,0.3,0.8,0.6,1,1c0.2,0.5,0.2,1-0.1,1.5c-0.3,0.5-0.8,0.9-1.1,1.3 c-0.5,0.5-0.8,1.1-0.9,1.7c-0.2,0.6-0.2,1.2,0.2,1.8c0.6,1,2,1.7,2,2.8c-0.1,0.9-1,1.5-1.4,2.2c-0.3,0.6-0.4,1.2-0.2,1.9 c0.2,0.7,0.5,1.3,1,1.8c1,1,2.4,1.4,3.9,1.5c-1.1-1-1.2-2.7-0.5-4c0.7-1.2,2.2-1.9,2.5-3.3c0.2-1.2-0.4-2.5,0.1-3.6 c0.7-1.5,3.3-1.3,4.1-2.9c0.3-0.9,0-1.9,0.3-2.8c0.2-0.7,0.6-1.1,1-1.5c0.4-0.4,0.8-0.9,0.9-1.6c0.1-0.5,0.1-0.9,0.1-1.6"></path>
@@ -53,8 +52,8 @@ export const Preloader = () => {
             </g>
             <g>
                <animateTransform attributeName="transform" type="rotate" values="360 50 50;0 50 50" keyTimes="0;1"
-                                 dur="1.3513513513513513s" repeatCount="indefinite" calcMode="spline"
-                                 keySplines="0.5 0 0.5 1" begin="-0.13513513513513514s"></animateTransform>
+                                 dur="1s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1"
+                                 begin="-0.1s"></animateTransform>
                <path fill="#ffffff" stroke="#0a0a0a"
                      d="M82.8,50c-0.1-3.1-0.4-6.2-1.3-9.2c-0.1-0.4-0.2-0.8-0.2-1.2c-0.1-0.4-0.1-0.8,0-1.2c0.1-0.8,0.3-1.6,0.7-2.4 c0.8-1.5,2-3,3.8-3.9l0,0c1.8-0.9,3.8-1,5.6-0.2c0.9,0.4,1.7,1,2.4,1.8c0.3,0.4,0.7,0.8,1,1.3c0.2,0.5,0.4,1,0.6,1.6 c1.4,4.3,1.9,8.8,1.9,13.3"></path>
                <path fill="#f9ae5c"

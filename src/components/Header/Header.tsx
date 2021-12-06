@@ -5,7 +5,7 @@ import s from './Header.module.scss'
 import {Avatar, Layout} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {AuthStateType, logout} from "../../redux/reducer/auth-reducer";
-import {AppStateType} from "../../redux/redux-store";
+import {AppRootStateT} from "../../redux/redux-store";
 import {PhotoType} from "../../redux/reducer/profile-reducer";
 
 
@@ -14,9 +14,9 @@ export const Header: React.FC = (props) => {
 
    const dispatch = useDispatch()
 
-   const authDate = useSelector<AppStateType, AuthStateType>(state => state.auth)
+   const authDate = useSelector<AppRootStateT, AuthStateType>(state => state.auth)
 
-   const avatar = useSelector<AppStateType, PhotoType | null>(state => state.auth.photo)
+   const avatar = useSelector<AppRootStateT, PhotoType | null>(state => state.auth.photo)
 
    const onClickHandlerLogout = () => {
       dispatch(logout())

@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@700&display=swap');
+
+.wrap {
+  background-color: #001529;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  margin: -10px -20px;
+}
+
+.title {
+  width: 18ch;
+  color: white;
+  font-family: 'Ubuntu Mono', monospace;
+  font-size: 50px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 4px solid orange;
+  animation: flash-border 1s step-end infinite, printed-text 4s steps(18);
+
+  @media (max-width: 510px) {
+    font-size: 30px;
+    border-right: 3px solid orange;
+  }
+}
+
+@keyframes flash-border {
+  0%, 100% {
+    border-color: orange;
+  }
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes printed-text {
+  from {
+    width: 0;
+  }
+}
+
+
+

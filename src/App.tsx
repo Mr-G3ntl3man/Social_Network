@@ -1,9 +1,9 @@
 import React, {useEffect, useCallback} from 'react';
 import {HashRouter} from "react-router-dom";
-import {connect} from "react-redux";
-import {AppStateType} from "./redux/redux-store";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateT} from "./redux/redux-store";
 import {Preloader} from "./components/common/Preloader/Preloader";
-import {initializedApp, installCaughtError, SeverityTooltipType} from "./redux/reducer/app-reducer";
+import {AppStateType, initializedApp, installCaughtError} from "./redux/reducer/app-reducer";
 import {Tooltip} from "./components/common/Tooltip/Tooltip";
 import 'antd/dist/antd.css';
 import {Layout, Breadcrumb} from 'antd';
@@ -12,18 +12,20 @@ import {Sidebar} from "./components/Sidebar/Sidebar";
 import s from './App.module.scss'
 import {Header} from "./components/Header/Header";
 
-const App: React.FC<AppPropsType> = (props) => {
-   const {initializedApp, initialized, catchError, installCaughtError} = props
+const App: React.FC = (props) => {
+   const {initialized, catchError} = useSelector<AppRootStateT, AppStateType>(state => state.app)
+
+   const dispatch = useDispatch()
 
    const {Content, Footer,} = Layout;
 
    const catchUnhandledRejection = useCallback((e: PromiseRejectionEvent) => {
-      installCaughtError(e.reason.message, 'error')
-   }, [installCaughtError])
+      dispatch(installCaughtError(e.reason.message, 'error'))
+   }, [dispatch])
 
    useEffect(() => {
-      initializedApp()
-   }, [initializedApp])
+      dispatch(initializedApp())
+   }, [dispatch])
 
    useEffect(() => {
       window.addEventListener('unhandledrejection', catchUnhandledRejection)
@@ -68,25 +70,4 @@ const App: React.FC<AppPropsType> = (props) => {
    )
 }
 
-type AppPropsType = MapDispatchToPropsType & MapStateToPropsType
-
-type MapStateToPropsType = {
-   initialized: boolean
-   catchError: {
-      error: boolean
-      messageError: string | null
-      severity: SeverityTooltipType
-   }
-}
-
-type MapDispatchToPropsType = {
-   initializedApp: () => void
-   installCaughtError: (message: string, severity: SeverityTooltipType) => void
-}
-
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-   initialized: state.app.initialized,
-   catchError: state.app.catchError
-})
-
-export default connect(mapStateToProps, {initializedApp, installCaughtError})(App)
+export default App

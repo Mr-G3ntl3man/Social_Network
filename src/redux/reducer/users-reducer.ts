@@ -1,6 +1,8 @@
 import {Dispatch} from "redux";
 import {usersAPI} from "../../api/api";
 import {installCaughtError} from "./app-reducer";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {AppRootStateT} from "../redux-store";
 
 export enum ACTION_TYPE_USERS {
    TOGGLE_FOLLOW = 'social_network/users/TOGGLE_FOLLOW',
@@ -143,8 +145,8 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
    } as const
 }
 
-export const getUsers = (currentPage: number, pageSize: number): (dispatch: Dispatch) => void => {
-   return async (dispatch: Dispatch) => {
+export const getUsers = (currentPage: number, pageSize: number) => {
+   return async (dispatch: Dispatch<ActionType>) => {
       dispatch(toggleIsFetchingAC(true))
       dispatch(setCurrentPage(currentPage))
 
@@ -158,7 +160,7 @@ export const getUsers = (currentPage: number, pageSize: number): (dispatch: Disp
    }
 }
 
-const followUnfollow = async (dispatch: Dispatch | any, userID: number, apiMethod: (id: number) => Promise<any>) => {
+const followUnfollow = async (dispatch: Dispatch<ActionType> | any, userID: number, apiMethod: (id: number) => Promise<any>) => {
 
    dispatch(toggleFollowingProgress(true, userID))
 
@@ -170,14 +172,14 @@ const followUnfollow = async (dispatch: Dispatch | any, userID: number, apiMetho
    dispatch(toggleFollowingProgress(false, userID))
 }
 
-export const followSuccess = (id: number): (dispatch: Dispatch) => void => {
-   return (dispatch) => {
+export const followSuccess = (id: number) => {
+   return (dispatch: Dispatch<ActionType>) => {
       followUnfollow(dispatch, id, usersAPI.followUser)
    }
 }
 
-export const unFollowSuccess = (id: number): (dispatch: Dispatch) => void => {
-   return async (dispatch) => {
+export const unFollowSuccess = (id: number) => {
+   return async (dispatch: Dispatch<ActionType>) => {
       followUnfollow(dispatch, id, usersAPI.unFollow)
    }
 }

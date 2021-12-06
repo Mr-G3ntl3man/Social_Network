@@ -1,5 +1,7 @@
-import {Dispatch} from "redux";
+import {Action, Dispatch} from "redux";
 import {getUserData} from "./auth-reducer";
+import {ThunkAction} from "redux-thunk";
+import {AppRootStateT} from "../redux-store";
 
 export enum ACTION_TYPE_APP {
    SUCCESSFUL_INITIALIZATION = 'social_network/app/SUCCESSFUL_INITIALIZATION',
@@ -18,6 +20,8 @@ export type AppStateType = {
 }
 
 type ActionType = ReturnType<typeof setInitialized> | ReturnType<typeof catchError>
+
+type ThunkActionT = ThunkAction<void, AppRootStateT, unknown, ActionType>
 
 const initialState: AppStateType = {
    initialized: false,
@@ -55,13 +59,14 @@ const catchError = (message: string | null, severity: SeverityTooltipType) => ({
    severity
 } as const)
 
-export const initializedApp = (): (dispatch: Dispatch | any) => void => (dispatch) => {
-   Promise.all([
-      dispatch(getUserData())
-   ]).then(() => dispatch(setInitialized()))
-}
+export const initializedApp = (): ThunkActionT =>
+   (dispatch) => {
+      Promise.all([
+         dispatch(getUserData())
+      ]).then(() => dispatch(setInitialized()))
+   }
 
-export const installCaughtError = (message: string, severity: SeverityTooltipType) => (dispatch: Dispatch) => {
+export const installCaughtError = (message: string, severity: SeverityTooltipType) => (dispatch: Dispatch<ActionType>) => {
    dispatch(catchError(message, severity))
 
    setTimeout(() => dispatch(catchError(null, "info")), 2000)

@@ -7,7 +7,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../../redux/redux-store";
+import {AppRootStateT} from "../../../redux/redux-store";
 import s from './ProfileInfo.module.scss'
 
 type ProfileInfoType = {
@@ -22,7 +22,7 @@ export const ProfileInfoEditForm: React.FC<ProfileInfoType> = (props) => {
 
    const dispatch = useDispatch()
 
-   const profile = useSelector<AppStateType, ProfileType | null>(state => state.profilePage.profile)
+   const profile = useSelector<AppRootStateT, ProfileType | null>(state => state.profilePage.profile)
 
    const schema = yup.object().shape({
       aboutMe: yup

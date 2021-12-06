@@ -13,7 +13,7 @@ type ProfileInfoType = {
 
 
 export const ProfileDesc: React.FC<ProfileContainerType & ProfileInfoType> = (props) => {
-   const defaultAvatar = (src: string | null | undefined) => src ? src : 'https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png'
+   const defaultAvatar = (src: string | null | undefined) => src ? src : 'https://media.istockphoto.com/vectors/web-developer-blue-rgb-color-icon-computer-software-development-pc-vector-id1251725147?k=20&m=1251725147&s=170667a&w=0&h=dP5REX1HGPDsX_YVsuvXubqJGhN-pg9_ooSkurdWPAA='
    const uploadPhotoHandler = (e: ChangeEvent<HTMLInputElement>) => {
       e.target.files && props.savePhoto(e.target.files[0])
    }
@@ -32,7 +32,9 @@ export const ProfileDesc: React.FC<ProfileContainerType & ProfileInfoType> = (pr
          <div className={s.profileDesc}>
             <div className={s.flexLeft}>
                <div className={s.profileAvatar}>
-                  <Avatar size={300} shape={'square'} src={<Image src={defaultAvatar(props.profile?.photos.large)}/>}/>
+                  <Avatar style={props.profile?.photos.large ? {} : {border: '2px solid #7e7e7e', borderRadius: '5px'}}
+                          size={300} shape={'square'}
+                          src={<Image src={defaultAvatar(props.profile?.photos.large)}/>}/>
                </div>
                {props.authorizedProfile &&
                <label htmlFor="contained-button-file">

@@ -10,32 +10,32 @@ import {
 } from "@material-ui/core";
 import * as yup from 'yup';
 import {yupResolver} from "@hookform/resolvers/yup";
-import {connect, useSelector} from "react-redux";
-import {FormDataType, login, setStatusMessAC, UserDataType} from "../../redux/reducer/auth-reducer";
-import {AppStateType} from "../../redux/redux-store";
+import {useDispatch, useSelector} from "react-redux";
+import {FormDataType, login, UserDataType} from "../../redux/reducer/auth-reducer";
+import {AppRootStateT} from "../../redux/redux-store";
 import {Navigate} from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from '@mui/material/Alert';
+import s from './form.module.scss'
 
+export const LoginPage: React.FC = () => {
+   const isAuth = useSelector<AppRootStateT, boolean>(state => state.auth.isAuth)
+   const authorizedUser = useSelector<AppRootStateT, UserDataType | null>(state => state.auth.userData)
 
-type MapDispatchToPropsType = {
-   login: (data: FormDataType) => void
-   setStatusMessAC: (message: string, showTooltip: boolean) => void
-}
-type LoginFormType = MapDispatchToPropsType & MapStateToPropsType
-
-export const LoginPage = (props: LoginFormType) => {
-   const authorizedUser = useSelector<AppStateType, UserDataType | null>(state => state.auth.userData)
-
-
-   if (props.isAuth) {
+   if (isAuth) {
       return <Navigate to={authorizedUser ? `/profile/${authorizedUser.id}` : '/login'}/>
    }
 
-   return <LoginForm  {...props}/>
+   return <LoginForm/>
 }
 
-const LoginForm: React.FC<LoginFormType> = (props) => {
+const LoginForm: React.FC = () => {
+   const statusMessages = useSelector<AppRootStateT, string>(state => state.auth.statusMessages)
+   const resultStatusMessage = useSelector<AppRootStateT, boolean>(state => state.auth.resultStatusMessage)
+   const captchaUrl = useSelector<AppRootStateT, string | null>(state => state.auth.captchaUrl)
+
+   const dispatch = useDispatch()
+
    const [openTooltip, setOpenTooltip] = useState<boolean>(false)
    const handleClick = () => setOpenTooltip(true)
    const handleClose = () => setOpenTooltip(false)
@@ -55,8 +55,7 @@ const LoginForm: React.FC<LoginFormType> = (props) => {
       resolver: yupResolver(schema)
    });
 
-   const onSubmit: SubmitHandler<FormDataType> = (data) => props.login(data)
-
+   const onSubmit: SubmitHandler<FormDataType> = (data) => dispatch(login(data))
 
    const useStyles = makeStyles(() => ({
       position: {
@@ -66,10 +65,7 @@ const LoginForm: React.FC<LoginFormType> = (props) => {
          alignItems: 'center'
       },
       container: {
-         margin: '100px 0'
-      },
-      width: {
-         width: '300px'
+         padding: '100px 0'
       }
    }))
 
@@ -87,13 +83,13 @@ const LoginForm: React.FC<LoginFormType> = (props) => {
                }}
                variant="filled"
                onClose={handleClose}
-               severity={props.resultStatusMessage ? 'success' : 'error'}>
-               {props.statusMessages}
+               severity={resultStatusMessage ? 'success' : 'error'}>
+               {statusMessages}
             </MuiAlert>
          </Snackbar>
 
          <form
-            className={`${useStyles().position} ${useStyles().width}`}
+            className={`${useStyles().position} ${s.width}`}
             noValidate
             onSubmit={handleSubmit(onSubmit)}>
 
@@ -133,12 +129,12 @@ const LoginForm: React.FC<LoginFormType> = (props) => {
             } label={'Remember me?'}/>
 
 
-            {props.captchaUrl &&
+            {captchaUrl &&
             <div style={{
                marginBottom: '20px',
                textAlign: 'center'
             }}>
-               <img src={props.captchaUrl} alt="captcha"/>
+               <img src={captchaUrl} alt="captcha"/>
                <TextField
                   required
                   fullWidth
@@ -166,20 +162,4 @@ const LoginForm: React.FC<LoginFormType> = (props) => {
    )
 }
 
-type MapStateToPropsType = {
-   isAuth: boolean
-   statusMessages: string
-   resultStatusMessage: boolean
-   captchaUrl: string | null
-}
-
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-   isAuth: state.auth.isAuth,
-   statusMessages: state.auth.statusMessages,
-   resultStatusMessage: state.auth.resultStatusMessage,
-   captchaUrl: state.auth.captchaUrl
-})
-
-export const LoginFormContainer = connect(mapStateToProps, {login, setStatusMessAC})(LoginPage)
-
-export default LoginFormContainer
+export default LoginPage

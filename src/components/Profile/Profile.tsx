@@ -4,7 +4,7 @@ import {ProfileDesc} from "./ProfileInfo/ProfileDesc";
 import {Preloader} from "../common/Preloader/Preloader";
 import {connect} from "react-redux";
 import {getStatus, ProfileType, savePhoto, setUserProfile, updateStatus} from "../../redux/reducer/profile-reducer";
-import {AppStateType} from "../../redux/redux-store";
+import {AppRootStateT} from "../../redux/redux-store";
 import {getAuthorizedUserId, getProfile, getProfileStatus} from "../../redux/selectors/profile-selector";
 import {useNavigate, useParams} from "react-router-dom";
 import {MyPosts} from "./MyPosts/MyPosts";
@@ -55,7 +55,7 @@ type MapDispatchToPropsType = {
    savePhoto: (file: File) => void
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: AppRootStateT): MapStateToPropsType => {
    return {
       profile: getProfile(state),
       status: getProfileStatus(state),

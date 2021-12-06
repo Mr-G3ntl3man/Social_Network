@@ -1,6 +1,6 @@
-import React, {createRef, RefObject, useState} from "react"
+import React, {useState} from "react"
 import {useSelector} from "react-redux";
-import {AppStateType} from "../../redux/redux-store";
+import {AppRootStateT} from "../../redux/redux-store";
 import {UserDataType} from "../../redux/reducer/auth-reducer";
 import {Link} from "react-router-dom";
 import {Layout, Menu} from "antd";
@@ -9,7 +9,7 @@ import {ButtonBurger} from "../common/ButtonBurger/ButtonBurger";
 import s from './Sidebar.module.scss'
 
 export const Sidebar = () => {
-   const authorizedUser = useSelector<AppStateType, UserDataType | null>(state => state.auth.userData)
+   const authorizedUser = useSelector<AppRootStateT, UserDataType | null>(state => state.auth.userData)
    const [collapsed, setCollapsed] = useState<boolean>(false)
    const [scrollDistance, setScrollDistance] = useState<boolean>(false)
 
@@ -41,7 +41,7 @@ export const Sidebar = () => {
             </div>
             <Menu theme="dark" mode="inline">
                <Menu.Item key="1" icon={<ProfileOutlined/>}>
-                  <Link to={authorizedUser ? `/profile/${authorizedUser.id}` : '/login'}>Profile</Link>
+                  <Link to={authorizedUser ? `/profile/${authorizedUser.id}` : '/'}>Profile</Link>
                </Menu.Item>
                <Menu.Item key="2" icon={<MessageOutlined/>}>
                   <Link to="/messages">Messages</Link>

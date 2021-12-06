@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./user.module.css";
+import s from "./user.module.scss";
 import {UsersType} from "../../redux/reducer/users-reducer";
 
 type PagesPropsType = {

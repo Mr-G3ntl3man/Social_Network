@@ -1,36 +1,34 @@
 import React from "react";
-import s from "./user.module.css";
-import {UsersType} from "../../redux/reducer/users-reducer";
+import s from "./user.module.scss";
+import {followSuccess, unFollowSuccess, UserType} from "../../redux/reducer/users-reducer";
 import {NavLink} from "react-router-dom";
 import {Button} from "@material-ui/core";
 import {Paper} from "@mui/material";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateT} from "../../redux/redux-store";
+import avatar from '../../image/defaultAvatar.jpg'
 
+export const Users: React.FC = (props) => {
+   const isFetching = useSelector<AppRootStateT, boolean>(state => state.usersPage.isFetching)
+   const users = useSelector<AppRootStateT, UserType[]>(state => state.usersPage.users)
+   const followingInProgress = useSelector<AppRootStateT, number[]>(state => state.usersPage.followingInProgress)
 
-type UsersPropsType = {
-   userPage: UsersType
-   unFollowSuccess: (userId: number) => void
-   followSuccess: (userId: number) => void
-}
+   const dispatch = useDispatch()
 
-export const Users: React.FC<UsersPropsType> = (props) => {
-   const defaultAvatar = (src: string | null) => src ? src : 'https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png'
+   const defaultAvatar = (src: string | null) => src ? src : avatar
 
-   const finalClassName = props.userPage.isFetching ? `${s.userMain} ${s.fetching}` : s.userMain
+   const finalClassName = isFetching ? `${s.userMain} ${s.fetching}` : s.userMain
 
-   const onClickUnFollowHandler = (id: number) => {
-      props.unFollowSuccess(id)
-   }
+   const onClickUnFollowHandler = (id: number) => dispatch(unFollowSuccess(id))
 
-   const onClickFollowHandler = (id: number) => {
-      props.followSuccess(id)
-   }
+   const onClickFollowHandler = (id: number) => dispatch(followSuccess(id))
 
    return (
       <div className={finalClassName}>
          {
-            props.userPage.users.map(el => <div className={s.usersWrap} key={el.id}>
+            users.map(el => <div className={s.usersWrap} key={el.id}>
                <div className={s.userControl}>
-                  <span className={s.avatar}>
+                  <span style={el.photos.small ? {} : {border: '2px solid #7e7e7e'}} className={s.avatar}>
                      <NavLink to={`/profile/${el.id}`}>
                         <img
                            src={defaultAvatar(el.photos.small)}
@@ -41,27 +39,22 @@ export const Users: React.FC<UsersPropsType> = (props) => {
 
                   {el.followed
                      ? <Button
-                        disabled={props.userPage.followingInProgress.some(id => id === el.id)}
+                        disabled={followingInProgress.some(id => id === el.id)}
                         variant="contained"
                         color="secondary"
                         onClick={() => onClickUnFollowHandler(el.id)}>UnFollow</Button>
                      : <Button
-                        disabled={props.userPage.followingInProgress.some(id => id === el.id)}
+                        disabled={followingInProgress.some(id => id === el.id)}
                         variant="contained"
                         color="primary"
                         onClick={() => onClickFollowHandler(el.id)}>Follow</Button>}
                </div>
 
                <div className={s.userContent}>
-                  <Paper style={{
-                     width: '100%',
-                     padding: '20px',
-                     display: 'flex',
-                     justifyContent: 'space-between'
-                  }} elevation={8}>
+                  <Paper className={s.paperContent} elevation={8}>
                      <div className={s.userInfo}>
                         <span className={s.userName}>{el.name}</span>
-                        <p className={s.userStatus}>{el.status || 'No status specified'}</p>
+                        <p className={s.userStatus}><span>Status:</span> {el.status || 'No status specified'}</p>
                      </div>
                      <div className={s.userLocation}>
                    <span className={s.userCountry}>
@@ -72,8 +65,6 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                </div>
             </div>)
          }
-
       </div>
-
    )
 }

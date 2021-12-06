@@ -2,25 +2,31 @@ import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.scss'
 import {Post} from "./Post/Post";
 
-import {Button, TextField} from "@material-ui/core";
+import {Button, Paper, TextField} from "@material-ui/core";
 import {addPostAC, changeTextAC, ProfilePageType} from "../../../redux/reducer/profile-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../../redux/redux-store";
+import {AppRootStateT} from "../../../redux/redux-store";
 
 type MyPostsPropsT = {
    authorizedProfile: boolean
 }
 
 export const MyPosts: React.FC<MyPostsPropsT> = React.memo((props) => {
+   const profilePage = useSelector<AppRootStateT, ProfilePageType>(state => state.profilePage)
    const dispatch = useDispatch()
-   const profilePage = useSelector<AppStateType, ProfilePageType>(state => state.profilePage)
 
-   const postElem = profilePage.posts.map(el => <Post
-      authorizedProfile={props.authorizedProfile}
-      id={el.id}
-      profileAvatar={profilePage.profile?.photos.small}
-      key={el.id} message={el.message}
-      likesCount={el.likesCount}/>)
+   const postElem = profilePage.posts.length
+      ? profilePage.posts.map(el => <Post
+         authorizedProfile={props.authorizedProfile}
+         id={el.id}
+         profileAvatar={profilePage.profile?.photos.small}
+         key={el.id} message={el.message}
+         likesCount={el.likesCount}/>)
+      : <Paper style={{padding: '20px'}} elevation={2}>
+         <div style={{fontFamily: `Mochiy Pop P One, sans-serif`, fontSize: '18px', letterSpacing: '1px'}}>
+            There are no posts
+         </div>
+      </Paper>
 
    const onClickForNewPosts = () => dispatch(addPostAC())
 

@@ -1,9 +1,6 @@
 import {TextField} from "@material-ui/core";
 import React, {ChangeEvent, useEffect, useState} from "react";
 import s from './ProfileInfo.module.scss'
-import {installCaughtError} from "../../../redux/reducer/app-reducer";
-import {useDispatch} from "react-redux";
-
 
 type ProfileStatusType = {
    status: string
@@ -28,10 +25,7 @@ export const ProfileStatus: React.FC<ProfileStatusType> = (props) => {
       setState(state => ({...state, status: status}))
    }, [status])
 
-
-   const onActivateEditMode = () => {
-      setState(state => ({...state, editMode: true}))
-   }
+   const onActivateEditMode = () => setState(state => ({...state, editMode: true}))
 
    const offActivateEditMode = () => {
       setState(state => ({...state, editMode: false}))

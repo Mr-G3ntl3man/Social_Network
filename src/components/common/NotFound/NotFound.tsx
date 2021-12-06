@@ -1,9 +1,14 @@
 import React from "react";
+import s from './notFound.module.scss'
 
-export const NotFound = () => {
+
+export const NotFound: React.FC = () => {
+
+
    return (
-      <div>
-         404 Page Not Found
+      <div className={s.wrap}>
+         <h4 className={s.title}>404 Page Not Found</h4>
       </div>
    )
 }
+

@@ -1,77 +1,46 @@
-import {connect} from "react-redux";
-import {AppStateType} from "../../redux/redux-store";
-import {
-   followSuccess,
-   getUsers, setPageSize,
-   toggleFollowingProgress, unFollowSuccess,
-   UsersType
-} from "../../redux/reducer/users-reducer";
-import React from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateT} from "../../redux/redux-store";
+import {getUsers,} from "../../redux/reducer/users-reducer";
+import React, {useEffect} from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
-import s from "./user.module.css";
-import {compose} from "redux";
-import {getUserPage} from "../../redux/selectors/user-selectors";
+import s from "./user.module.scss";
 import {Pagination} from 'antd';
 
+const UsersContainer: React.FC = () => {
+   const currentPage = useSelector<AppRootStateT, number>(state => state.usersPage.currentPage)
+   const pageSize = useSelector<AppRootStateT, number>(state => state.usersPage.pageSize)
+   const totalUserCount = useSelector<AppRootStateT, number>(state => state.usersPage.totalUserCount)
+   const isFetching = useSelector<AppRootStateT, boolean>(state => state.usersPage.isFetching)
 
-class UsersPageApiComponent extends React.Component<UsersPropsType> {
-   componentDidMount() {
-      this.props.getUsers(this.props.userPage.currentPage, this.props.userPage.pageSize)
-   }
+   const dispatch = useDispatch()
 
-   onChangeCurrentPage = (page: number, pageSize: number) => {
+   useEffect(() => {
+      dispatch(getUsers(currentPage, pageSize))
+   }, [dispatch, currentPage, pageSize])
+
+
+   const onChangeCurrentPage = (page: number, pageSize: number) => {
       if (page === 0) page = 1
 
-      this.props.getUsers(page, pageSize)
+      dispatch(getUsers(page, pageSize))
    }
 
-   render() {
-      return (
-         <div className={s.usersMainWrap}>
-            {this.props.userPage.isFetching && <Preloader/>}
 
-            <Pagination
-               onChange={this.onChangeCurrentPage}
-               defaultCurrent={1}
-               defaultPageSize={this.props.userPage.pageSize}
-               total={this.props.userPage.totalUserCount}/>
+   return (
+      <div className={s.usersMainWrap}>
+         {isFetching && <Preloader/>}
 
-            <Users
-               userPage={this.props.userPage}
-               unFollowSuccess={this.props.unFollowSuccess}
-               followSuccess={this.props.followSuccess}
-            />
+         <Pagination
+            className={s.paginator}
+            onChange={onChangeCurrentPage}
+            defaultCurrent={1}
+            defaultPageSize={pageSize}
+            total={totalUserCount}/>
 
-         </div>
-      )
-   }
+         <Users/>
+      </div>
+   )
 }
-
-export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
-
-type MapStateToPropsType = {
-   userPage: UsersType
-}
-
-type MapDispatchToPropsType = {
-   followSuccess: (userId: number) => void
-   unFollowSuccess: (userId: number) => void
-   toggleFollowingProgress: (following: boolean, userId: number) => void
-   getUsers: (currentPage: number, pageSize: number) => void
-}
-
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-   userPage: getUserPage(state)
-})
-
-
-export const UsersContainer = compose(
-   connect(mapStateToProps, {
-      followSuccess, unFollowSuccess,
-      toggleFollowingProgress, getUsers, setPageSize
-   })
-)(UsersPageApiComponent)
-
 
 export default UsersContainer
