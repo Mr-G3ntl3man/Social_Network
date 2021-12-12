@@ -4,9 +4,10 @@ import {AppRootStateT} from "../../redux/redux-store";
 import {UserDataType} from "../../redux/reducer/auth-reducer";
 import {Link} from "react-router-dom";
 import {Layout, Menu} from "antd";
-import {MessageOutlined, ProfileOutlined, UserOutlined} from "@ant-design/icons";
+import {CommentOutlined, CustomerServiceOutlined, ProfileOutlined, UserOutlined} from "@ant-design/icons";
 import {ButtonBurger} from "../common/ButtonBurger/ButtonBurger";
 import s from './Sidebar.module.scss'
+import {MusicNote} from "@mui/icons-material";
 
 export const Sidebar = () => {
    const authorizedUser = useSelector<AppRootStateT, UserDataType | null>(state => state.auth.userData)
@@ -43,15 +44,20 @@ export const Sidebar = () => {
                <Menu.Item key="1" icon={<ProfileOutlined/>}>
                   <Link to={authorizedUser ? `/profile/${authorizedUser.id}` : '/'}>Profile</Link>
                </Menu.Item>
-               <Menu.Item key="2" icon={<MessageOutlined/>}>
-                  <Link to="/messages">Messages</Link>
-               </Menu.Item>
-               <Menu.Item key="3" icon={<UserOutlined/>}>
+
+               <Menu.Item key="2" icon={<UserOutlined/>}>
                   <Link to="/users">Users</Link>
+               </Menu.Item>
+
+               <Menu.Item key="3" icon={<CommentOutlined/>}>
+                  <Link to="/chat">General Chat</Link>
+               </Menu.Item>
+
+               <Menu.Item key="4" icon={<CustomerServiceOutlined/>}>
+                  <Link to="/music">Spotify Music</Link>
                </Menu.Item>
             </Menu>
          </div>
-
       </Layout.Sider>
    )
 }

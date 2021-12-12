@@ -1,8 +1,6 @@
 import {Dispatch} from "redux";
-import {usersAPI} from "../../api/api";
+import {RESULT_CODE, usersAPI} from "../../api/api";
 import {installCaughtError} from "./app-reducer";
-import {ThunkAction, ThunkDispatch} from "redux-thunk";
-import {AppRootStateT} from "../redux-store";
 
 export enum ACTION_TYPE_USERS {
    TOGGLE_FOLLOW = 'social_network/users/TOGGLE_FOLLOW',
@@ -37,8 +35,8 @@ export type UserType = {
    photos: PhotoType
    followed: boolean
    name: string
-   status: string | null
-   uniqueUrlName: string | null
+   status: string
+   uniqueUrlName?: string | null
    location?: LocationType
 }
 
@@ -166,8 +164,8 @@ const followUnfollow = async (dispatch: Dispatch<ActionType> | any, userID: numb
 
    const response = await apiMethod(userID)
 
-   response.resultCode === 0 && dispatch(toggleFollow(userID))
-   response.resultCode !== 0 && dispatch(installCaughtError(response.messages, 'warning'))
+   response.resultCode === RESULT_CODE.SUCCESSFULLY && dispatch(toggleFollow(userID))
+   response.resultCode !== RESULT_CODE.SUCCESSFULLY && dispatch(installCaughtError(response.messages, 'warning'))
 
    dispatch(toggleFollowingProgress(false, userID))
 }

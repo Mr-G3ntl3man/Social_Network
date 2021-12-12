@@ -1,0 +1,98 @@
+import React, {useEffect, useRef, useState} from "react";
+import s from './chat.module.scss'
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateT} from "../../redux/redux-store";
+import {
+   ChatMessageT,
+   startMessagesListening,
+   stopMessagesListening,
+   WS_STATUS
+} from "../../redux/reducer/chat-reducer";
+import {Message} from "./Message";
+import {SendMessageForm} from "./SendMessageForm";
+import {Tooltip} from "../common/Tooltip/Tooltip";
+
+export const Chat: React.FC = (props) => {
+   const wsStatus = useSelector<AppRootStateT, WS_STATUS>(state => state.chat.status)
+
+   const messages = useSelector<AppRootStateT, ChatMessageT[]>(state => state.chat.messages)
+
+   const wsError = useSelector<AppRootStateT, boolean>(state => state.chat.error)
+
+   const [autoScroll, setAutoScroll] = useState<boolean>(false)
+
+   const [startScroll, setStartScroll] = useState<boolean>(false)
+
+   const usersMessages = messages.map((user) => <Message key={user.id} user={user}/>)
+
+   const messagesDivRef = useRef<HTMLDivElement>(null)
+
+   const dispatch = useDispatch()
+
+
+   useEffect(() => {
+      dispatch(startMessagesListening())
+
+      return () => {
+         dispatch(stopMessagesListening())
+      }
+   }, [dispatch])
+
+   useEffect(() => {
+      const target = messagesDivRef.current
+
+      if (startScroll) {
+
+         if (autoScroll) {
+            target && target.scrollBy({
+               top: target.scrollHeight,
+               behavior: 'smooth'
+            })
+         }
+
+      } else {
+         target && (target.scrollTop = target.scrollHeight)
+      }
+
+      return () => {
+         setStartScroll(false)
+      }
+   }, [messages])
+
+
+   const onScrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+      const target = messagesDivRef.current
+
+      if (target) {
+         const clientHeight = target.clientHeight
+         const scrollDistance = Math.floor(target.scrollHeight - target.scrollTop)
+
+         if (clientHeight >= scrollDistance) {
+            !autoScroll && setAutoScroll(true)
+            setStartScroll(true)
+         } else {
+            autoScroll && setAutoScroll(false)
+         }
+      }
+   }
+
+   return (
+      <>
+         {wsStatus === WS_STATUS.ERROR &&
+         <Tooltip
+            messages={'Something went wrong, please reload the page!!!'}
+            severity={'error'} open={wsError}
+            anchorOrigin={{vertical: 'top', horizontal: 'center'}}/>}
+
+         <div className={s.mainWrap}>
+            <div ref={messagesDivRef} onScroll={onScrollHandler} className={s.messageWrap}>
+               {usersMessages}
+            </div>
+
+            <SendMessageForm/>
+         </div>
+      </>
+   )
+}
+
+export default Chat

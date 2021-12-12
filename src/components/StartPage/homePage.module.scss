@@ -7,7 +7,7 @@
   align-items: center;
   height: 100vh;
   padding: 70px 20px 20px 20px;
-  margin: -10px -20px;
+  margin: 0 -10px;
 
   @media (max-width: 950px) {
     padding: 20px;
@@ -28,7 +28,7 @@
   white-space: nowrap;
   overflow: hidden;
   border-right: 6px solid orange;
-  animation: flash-border 1s step-end infinite, printed-text 4s steps(18);
+  animation: flash-border 1s step-end infinite, printed-text 2s steps(18);
 
   @media (max-width: 510px) {
     font-size: 30px;

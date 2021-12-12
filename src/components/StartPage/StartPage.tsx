@@ -1,8 +1,17 @@
 import React from "react";
 import s from './homePage.module.scss'
 import {NeonBtn} from "../common/NeonBtn/NeonBtn";
+import {useSelector} from "react-redux";
+import {AppRootStateT} from "../../redux/redux-store";
+import {UserDataType} from "../../redux/reducer/auth-reducer";
+import {Navigate} from "react-router-dom";
 
 export const StartPage: React.FC = () => {
+   const isAuth = useSelector<AppRootStateT, boolean>(state => state.auth.isAuth)
+   const authorizedUser = useSelector<AppRootStateT, UserDataType | null>(state => state.auth.userData)
+
+   if (isAuth) return <Navigate replace to={`/profile/${authorizedUser?.id}`}/>
+
    return (
       <div className={s.wrap}>
 

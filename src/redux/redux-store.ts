@@ -5,13 +5,15 @@ import {usersReducer} from "./reducer/users-reducer";
 import {authReducer} from "./reducer/auth-reducer";
 import thunk from 'redux-thunk'
 import {appReducer} from "./reducer/app-reducer";
+import {chatReducer} from "./reducer/chat-reducer";
 
 const rootReducer = combineReducers({
    profilePage: profileReducer,
    dialogsPage: dialogReducer,
    usersPage: usersReducer,
    auth: authReducer,
-   app: appReducer
+   app: appReducer,
+   chat: chatReducer
 })
 
 export type AppRootStateT = ReturnType<typeof rootReducer>

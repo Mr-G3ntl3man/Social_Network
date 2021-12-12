@@ -69,3 +69,5 @@ export const ProfileContainer = connect(mapStateToProps, {
    getStatus,
    updateStatus
 })(Profile)
+
+export default ProfileContainer

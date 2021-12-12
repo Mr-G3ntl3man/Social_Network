@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {authAPI, profileAPI, securityApi} from "../../api/api";
+import {authAPI, profileAPI, RESULT_CODE, securityApi} from "../../api/api";
 import {installCaughtError} from "./app-reducer";
 import {PhotoType} from "./profile-reducer";
 import {ThunkAction} from "redux-thunk";
@@ -86,8 +86,8 @@ export const setStatusMessAC = (message: string, resultStatusMessage: boolean) =
    resultStatusMessage
 } as const)
 
-export const getUserData = (): (dispatch: Dispatch<ActionType>) => void => {
-   return async (dispatch) => {
+export const getUserData = () => {
+   return async (dispatch: Dispatch<ActionType>) => {
       const response = await authAPI.getUserData()
 
       if (response.resultCode === 0) {
@@ -98,7 +98,6 @@ export const getUserData = (): (dispatch: Dispatch<ActionType>) => void => {
       }
 
       response.resultCode !== 0 && dispatch(setStatusMessAC(response.messages[0], false))
-
    }
 }
 
@@ -116,13 +115,13 @@ export const login = (data: FormDataType): ThunkActionT => {
    return async (dispatch) => {
       const response = await authAPI.login(data)
 
-      response.resultCode !== 0 && dispatch(setStatusMessAC(response.messages[0], false))
-      response.resultCode === 10 && await dispatch(getCaptchaUrl())
+      response.resultCode !== RESULT_CODE.SUCCESSFULLY && dispatch(setStatusMessAC(response.messages[0], false))
+      response.resultCode === RESULT_CODE.CAPTCHA && await dispatch(getCaptchaUrl())
 
-      if (response.resultCode === 0) {
+      if (response.resultCode === RESULT_CODE.SUCCESSFULLY) {
          dispatch(setStatusMessAC('Successful login', true))
 
-         dispatch(getUserData())
+         await dispatch(getUserData())
       }
    }
 }
@@ -131,8 +130,8 @@ export const logout = (): ThunkActionT => {
    return async (dispatch) => {
       const response = await authAPI.logout()
 
-      response.data.resultCode === 0 && dispatch(setUserDataAC(null, false))
-      response.data.resultCode !== 0 && dispatch(installCaughtError(response.data.messages, 'warning'))
+      response.data.resultCode === RESULT_CODE.SUCCESSFULLY && dispatch(setUserDataAC(null, false))
+      response.data.resultCode !== RESULT_CODE.SUCCESSFULLY && dispatch(installCaughtError(response.data.messages[0], 'warning'))
    }
 }
 

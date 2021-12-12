@@ -12,6 +12,7 @@ export const Users: React.FC = (props) => {
    const isFetching = useSelector<AppRootStateT, boolean>(state => state.usersPage.isFetching)
    const users = useSelector<AppRootStateT, UserType[]>(state => state.usersPage.users)
    const followingInProgress = useSelector<AppRootStateT, number[]>(state => state.usersPage.followingInProgress)
+   const isAuth = useSelector<AppRootStateT, boolean>(state => state.auth.isAuth)
 
    const dispatch = useDispatch()
 
@@ -39,15 +40,16 @@ export const Users: React.FC = (props) => {
 
                   {el.followed
                      ? <Button
-                        disabled={followingInProgress.some(id => id === el.id)}
+                        disabled={!isAuth || followingInProgress.some(id => id === el.id)}
                         variant="contained"
                         color="secondary"
                         onClick={() => onClickUnFollowHandler(el.id)}>UnFollow</Button>
                      : <Button
-                        disabled={followingInProgress.some(id => id === el.id)}
+                        disabled={!isAuth || followingInProgress.some(id => id === el.id)}
                         variant="contained"
                         color="primary"
                         onClick={() => onClickFollowHandler(el.id)}>Follow</Button>}
+
                </div>
 
                <div className={s.userContent}>

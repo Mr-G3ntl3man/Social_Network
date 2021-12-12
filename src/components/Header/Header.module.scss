@@ -46,11 +46,14 @@
   }
 
   @media (max-width: 450px) {
-    font-size: 11px;
     letter-spacing: 1px;
     button {
       font-size: 10px;
     }
+  }
+
+  @media (max-width: 380px) {
+    font-size: 11px;
   }
 }
 

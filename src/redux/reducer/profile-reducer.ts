@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import {v1} from "uuid";
-import {profileAPI} from "../../api/api";
+import {profileAPI, RESULT_CODE} from "../../api/api";
 import {AppRootStateT} from "../redux-store";
 import {installCaughtError} from "./app-reducer";
 import {restoreState, saveState} from "./localStorage/localStorage";
@@ -90,7 +90,6 @@ const initialState: ProfilePageType = {
    newPostText: '',
    status: ''
 }
-
 
 export const profileReducer = (state = initialState, action: ActionType): ProfilePageType => {
    switch (action.type) {
@@ -231,22 +230,22 @@ export const getStatus = (id: number) => (dispatch: Dispatch<ActionType>) => {
 export const updateStatus = (status: string): ThunkActionT => (dispatch) => {
    profileAPI.updateStatus(status)
       .then(response => {
-         response.data.resultCode === 0 && dispatch(setStatusAC(status))
-         response.data.resultCode !== 0 && dispatch(installCaughtError(response.data.messages, 'warning'))
+         response.data.resultCode === RESULT_CODE.SUCCESSFULLY && dispatch(setStatusAC(status))
+         response.data.resultCode !== RESULT_CODE.SUCCESSFULLY && dispatch(installCaughtError(response.data.messages[0], 'warning'))
       })
 }
 
 export const savePhoto = (file: File): ThunkActionT => async (dispatch) => {
    const response = await profileAPI.savePhoto(file)
 
-   response.resultCode === 0 && dispatch(savePhotoSuccess(response.data))
-   response.resultCode !== 0 && dispatch(installCaughtError(response.messages, 'warning'))
+   response.resultCode === RESULT_CODE.SUCCESSFULLY && dispatch(savePhotoSuccess(response.data))
+   response.resultCode !== RESULT_CODE.SUCCESSFULLY && dispatch(installCaughtError(response.messages[0], 'warning'))
 }
 
 export const saveProfile = (profile: ProfileEditFormType): ThunkActionT => async (dispatch, getState) => {
    const userId = getState().auth.userData?.id
    const response = await profileAPI.saveProfile(profile)
 
-   response.data.resultCode === 0 && userId && await dispatch(setUserProfile(userId))
-   response.data.resultCode !== 0 && dispatch(installCaughtError(response.data.messages, 'warning'))
+   response.data.resultCode === RESULT_CODE.SUCCESSFULLY && userId && await dispatch(setUserProfile(userId))
+   response.data.resultCode !== RESULT_CODE.SUCCESSFULLY && dispatch(installCaughtError(response.data.messages[0], 'warning'))
 }

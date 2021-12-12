@@ -52,9 +52,9 @@ const App: React.FC = (props) => {
                      {/*   <Breadcrumb.Item>User</Breadcrumb.Item>*/}
                      {/*   <Breadcrumb.Item>Bill</Breadcrumb.Item>*/}
                      {/*</Breadcrumb>*/}
-                     <div className="site-layout-background" style={{padding: 10, minHeight: 360}}>
-                        <Routers/>
-                     </div>
+
+                     <Routers/>
+
                   </Content>
                   <Footer className={s.footer}>Small Developer ©2021 Created by Mr. Nobody</Footer>
                </Layout>

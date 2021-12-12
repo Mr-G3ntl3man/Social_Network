@@ -9,8 +9,6 @@ enum ACTION_TYPE_DIALOGS {
 
 type ActionType = ReturnType<typeof changeMessageAC> | ReturnType<typeof addMessageAC>
 
-type ThunkActionT = ThunkAction<void, AppRootStateT, unknown, ActionType>
-
 export type DialogsPageType = {
    dialogs: Array<DialogsType>
    messages: Array<MessagesType>
