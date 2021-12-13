@@ -12,7 +12,7 @@ import {Message} from "./Message";
 import {SendMessageForm} from "./SendMessageForm";
 import {Tooltip} from "../common/Tooltip/Tooltip";
 
-export const Chat: React.FC = (props) => {
+export const Chat: React.FC = () => {
    const wsStatus = useSelector<AppRootStateT, WS_STATUS>(state => state.chat.status)
 
    const messages = useSelector<AppRootStateT, ChatMessageT[]>(state => state.chat.messages)
@@ -38,6 +38,7 @@ export const Chat: React.FC = (props) => {
       }
    }, [dispatch])
 
+
    useEffect(() => {
       const target = messagesDivRef.current
 
@@ -60,7 +61,7 @@ export const Chat: React.FC = (props) => {
    }, [messages])
 
 
-   const onScrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+   const onScrollHandler = () => {
       const target = messagesDivRef.current
 
       if (target) {

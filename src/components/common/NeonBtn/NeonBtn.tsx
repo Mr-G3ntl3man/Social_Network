@@ -9,10 +9,11 @@ type PropsType = {
    name: string
    callBack?: () => void
    className?: string
+   style?: React.CSSProperties
 }
 
 export const NeonBtn: React.FC<PropsType> = (props) => {
-   const {callBack, name, className, link, goAnotherSite} = props
+   const {callBack, name, className, link, goAnotherSite, style} = props
 
    const onClickHandler = () => {
       callBack && callBack()
@@ -23,6 +24,7 @@ export const NeonBtn: React.FC<PropsType> = (props) => {
       <>{goAnotherSite
          ? <a href={link} target='blank'>
             <button
+               style={style}
                onClick={onClickHandler}
                className={`${s.btn} ${className}`}>
                <span className={`${s.line} ${s.lineTop}`}> </span>
@@ -34,6 +36,7 @@ export const NeonBtn: React.FC<PropsType> = (props) => {
          </a>
          : <Link to={link}>
             <button
+               style={style}
                onClick={onClickHandler}
                className={`${s.btn} ${className}`}>
                <span className={`${s.line} ${s.lineTop}`}> </span>
