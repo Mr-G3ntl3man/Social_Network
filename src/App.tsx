@@ -1,5 +1,5 @@
 import React, {useEffect, useCallback} from 'react';
-import {HashRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateT} from "./redux/redux-store";
 import {Preloader} from "./components/common/Preloader/Preloader";
@@ -40,7 +40,7 @@ const App: React.FC = (props) => {
    }
 
    return (
-      <HashRouter>
+      <BrowserRouter>
          <Layout>
             <Header/>
             <Layout className={s.layoutSider} style={{minHeight: '100vh', margin: '15px 0 0 0'}}>
@@ -66,7 +66,7 @@ const App: React.FC = (props) => {
             messages={catchError.messageError}
             severity={catchError.severity} open={catchError.error}
             anchorOrigin={{vertical: 'top', horizontal: 'center'}}/>}
-      </HashRouter>
+      </BrowserRouter>
    )
 }
 

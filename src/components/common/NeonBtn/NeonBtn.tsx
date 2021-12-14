@@ -22,7 +22,7 @@ export const NeonBtn: React.FC<PropsType> = (props) => {
 
    return (
       <>{goAnotherSite
-         ? <a href={link} target='blank'>
+         ? <a href={link}>
             <button
                style={style}
                onClick={onClickHandler}
