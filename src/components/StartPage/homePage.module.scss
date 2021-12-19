@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   padding: 70px 20px 20px 20px;
   margin: 0 -10px;
 
@@ -106,13 +106,47 @@
 
 .descTeh {
   font-family: 'Inconsolata', monospace;
-  font-size: 30px;
+  font-size: 25px;
   color: white;
   text-align: center;
   margin-top: 20px;
+
+
   @media (max-width: 450px) {
     font-size: 20px;
     margin: 10px;
+  }
+}
+
+.accountCredentials {
+  text-align: left;
+  padding-top: 10px;
+  margin: 0 auto;
+  max-width: 380px;
+
+  span {
+    font-family: 'Inconsolata', monospace;
+    display: block;
+    margin: 5px 0;
+    font-size: 30px;
+    font-weight: 500;
+    color: orange;
+  }
+
+  @media (max-width: 750px) {
+    max-width: 315px;
+
+    span {
+      font-size: 25px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    max-width: none;
+    text-align: center;
+    span {
+      font-size: 20px;
+    }
   }
 }
 

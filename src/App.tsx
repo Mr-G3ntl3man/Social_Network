@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback} from 'react';
+import React, {useEffect, useCallback, FC} from 'react';
 import {BrowserRouter, HashRouter} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateT} from "./redux/redux-store";
@@ -6,13 +6,13 @@ import {Preloader} from "./components/common/Preloader/Preloader";
 import {AppStateType, initializedApp, installCaughtError} from "./redux/reducer/app-reducer";
 import {Tooltip} from "./components/common/Tooltip/Tooltip";
 import 'antd/dist/antd.css';
-import {Layout, Breadcrumb} from 'antd';
+import {Layout} from 'antd';
 import {Routers} from "./Router/Routes";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import s from './App.module.scss'
 import {Header} from "./components/Header/Header";
 
-const App: React.FC = (props) => {
+const App: FC = () => {
    const {initialized, catchError} = useSelector<AppRootStateT, AppStateType>(state => state.app)
 
    const dispatch = useDispatch()
@@ -46,15 +46,8 @@ const App: React.FC = (props) => {
             <Layout className={s.layoutSider} style={{minHeight: '100vh', margin: '15px 0 0 0'}}>
                <Sidebar/>
                <Layout className={s.siteLayout}>
-
                   <Content className={s.content}>
-                     {/*<Breadcrumb style={{margin: '16px 0'}}>*/}
-                     {/*   <Breadcrumb.Item>User</Breadcrumb.Item>*/}
-                     {/*   <Breadcrumb.Item>Bill</Breadcrumb.Item>*/}
-                     {/*</Breadcrumb>*/}
-
                      <Routers/>
-
                   </Content>
                   <Footer className={s.footer}>Small Developer ©2021 Created by Mr. Nobody</Footer>
                </Layout>

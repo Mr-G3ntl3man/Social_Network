@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import {useSelector} from "react-redux";
 import {AppRootStateT} from "../../redux/redux-store";
 import {UserDataType} from "../../redux/reducer/auth-reducer";
@@ -7,7 +7,6 @@ import {Layout, Menu} from "antd";
 import {CommentOutlined, CustomerServiceOutlined, ProfileOutlined, UserOutlined} from "@ant-design/icons";
 import {ButtonBurger} from "../common/ButtonBurger/ButtonBurger";
 import s from './Sidebar.module.scss'
-import {MusicNote} from "@mui/icons-material";
 
 export const Sidebar = () => {
    const authorizedUser = useSelector<AppRootStateT, UserDataType | null>(state => state.auth.userData)
@@ -16,18 +15,28 @@ export const Sidebar = () => {
 
    const onClickHandler = () => setCollapsed(state => !state)
 
-   window.addEventListener('scroll', () => {
+   const listenerScroll = () => {
       let scrollDistance = window.scrollY
       scrollDistance > 80 ? setScrollDistance(true) : setScrollDistance(false)
-   })
-
-   window.addEventListener('resize', () => {
+   }
+   const listenerResize = () => {
       if (window.innerWidth < 750) setCollapsed(state => false)
-   })
+   }
 
    const fixedSideBarClassName = collapsed
       ? `${s.fixedSideBar} ${scrollDistance ? s.fixed : ''}`
       : `${s.fixedSideBar} ${s.open} ${scrollDistance ? s.fixed : ''}`
+
+
+   useEffect(() => {
+      window.addEventListener('scroll', listenerScroll)
+      window.addEventListener('resize', listenerResize)
+
+      return () => {
+         window.removeEventListener('scroll', listenerScroll)
+         window.removeEventListener('resize', listenerResize)
+      }
+   }, [])
 
    return (
       <Layout.Sider
@@ -54,7 +63,7 @@ export const Sidebar = () => {
                </Menu.Item>
 
                <Menu.Item key="4" icon={<CustomerServiceOutlined/>}>
-                  <Link to="/music">Spotify Music</Link>
+                  <Link to="/spotifyMusic">Spotify Music</Link>
                </Menu.Item>
             </Menu>
          </div>

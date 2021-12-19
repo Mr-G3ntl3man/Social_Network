@@ -16,6 +16,7 @@ export const StartPage: React.FC = () => {
       <div className={s.wrap}>
 
          <h1 className={s.mainTitle}>Social Network 🚀</h1>
+
          <p className={s.desc}>
             Yo stranger, this is SPA a small social network, a pet project on which a juniors developer trains.
          </p>
@@ -24,7 +25,11 @@ export const StartPage: React.FC = () => {
             <a target='blank' href="https://github.com/MrGentelman/Social_network_React_Redux">GitHub</a>
          </p>
          <div className={s.descTeh}>
-            <span>To test the application, you need to register or log in.</span>
+            <span>To test the application, register or log in or use common test account credentials: </span>
+            <div className={s.accountCredentials}>
+               <span>Email: free@samuraijs.com</span>
+               <span>Password: free</span>
+            </div>
             <div className={s.btnGroup}>
                <NeonBtn goAnotherSite={true} link={'https://social-network.samuraijs.com/signUp'} name={'Register'}/>
                <NeonBtn goAnotherSite={false} link={'/login'} name={'Login'}/>

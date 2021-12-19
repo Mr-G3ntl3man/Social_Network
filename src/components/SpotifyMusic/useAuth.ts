@@ -1,45 +1,31 @@
-import {useState, useEffect} from "react"
-import axios from "axios"
+import {useEffect} from "react"
 import {useNavigate,} from "react-router-dom";
-
+import {loginTokenSpotify, refreshTokenSpotify} from "../../redux/reducer/spotify-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateT} from "../../redux/redux-store";
 
 export const useAuth = (code: string) => {
-   const [accessToken, setAccessToken] = useState()
-   const [refreshToken, setRefreshToken] = useState()
-   const [expiresIn, setExpiresIn] = useState()
+   const accessToken = useSelector<AppRootStateT, string>(state => state.spotify.token.accessToken)
+   const refreshToken = useSelector<AppRootStateT, string>(state => state.spotify.token.refreshToken)
+   const expiresIn = useSelector<AppRootStateT, number>(state => state.spotify.token.expiresIn)
+
+   const dispatch = useDispatch()
+
    const navigate = useNavigate()
 
    useEffect(() => {
-      axios.post("http://localhost:3001/loginSpotify", {code,})
-         .then(res => {
-            debugger
-            setAccessToken(res.data.accessToken)
-            setRefreshToken(res.data.refreshToken)
-            setExpiresIn(res.data.expiresIn)
+      if (!accessToken) dispatch(loginTokenSpotify(code))
 
-            navigate('/music')
-         })
-         .catch((e) => {
-            console.log(e)
-            navigate('/music')
-         })
+      navigate('/spotifyMusic')
    }, [code])
 
    useEffect(() => {
       if (!refreshToken || !expiresIn) return
+
       const interval = setInterval(() => {
-         axios
-            .post("http://localhost:3001/refreshToken", {
-               refreshToken,
-            })
-            .then(res => {
-               setAccessToken(res.data.accessToken)
-               setExpiresIn(res.data.expiresIn)
-            })
-            .catch((e) => {
-               console.log(e)
-               navigate('/music')
-            })
+         dispatch(refreshTokenSpotify(refreshToken))
+
+         navigate('/spotifyMusic')
       }, (expiresIn - 60) * 1000)
 
       return () => clearInterval(interval)

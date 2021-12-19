@@ -1,8 +1,8 @@
-import React from "react";
+import React, {FC} from "react";
 import s from './preloader.module.css'
 
 
-export const Preloader = () => {
+export const Preloader: FC = () => {
    return (
       <div className={s.preloader}>
          <svg xmlns="http://www.w3.org/2000/svg" width="300px" height="300px" viewBox="0 0 100 100"

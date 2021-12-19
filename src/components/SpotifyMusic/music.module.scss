@@ -1,11 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
 .wrap {
-  padding: 10px 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   height: 100%;
+  position: relative
 }
 
 .song {
   flex: 1 1 auto;
-  background-color: rgb(69, 175, 0);
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(100vh - 250px);
+  margin-bottom: 10px;
+
+  @media (max-width: 750px) {
+    height: calc(100vh - 340px);
+  }
+
+  @media (max-width: 600px) {
+    height: calc(100vh - 380px);
+  }
+
+}
+
+.searchResult {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  cursor: pointer;
+  padding: 5px;
+  border: 1px solid transparent;
+  transition: border 0.3s ease-in-out;
+  border-radius: 5px;
+
+  &:hover {
+    border: 1px solid #bbbbbb;
+    transition: border 0.2s ease-in-out;
+  }
+
+  img {
+    height: 75px;
+    width: 75px;
+  }
+
+  @media (max-width: 750px) {
+
+  }
+
+}
+
+.trackTitle {
+  font-size: 23px;
+  font-family: 'Montserrat', sans-serif;
+  @media (max-width: 750px) {
+    font-size: 16px;
+  }
+}
+
+.descWrap {
+  margin-left: 10px;
+}
+
+.trackArtist {
+  color: #797979;
+  font-size: 17px;
+  font-weight: 400;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.noTracks {
+  font-size: 35px;
+  text-align: center;
+  margin-top: 50px;
+  font-weight: 500;
+  color: #7a7a7a;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.lyrics {
+  text-align: center;
+  white-space: pre;
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+
+  &.notFound {
+    font-size: 25px;
+  }
+
+  @media (max-width: 900px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 400px) {
+    font-size: 10px;
+  }
+
+  @media (max-width: 350px) {
+    font-size: 8px;
+  }
+
+  @media (max-width: 550px) {
+    font-size: 14px;
+  }
+}
+
+.player {
+
+
+  &.none {
+    button {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+}
+
+.notSearch {
+  font-size: 25px;
+  text-align: center;
+
+  span:first-child {
+    font-weight: 500;
+  }
+
+  span:last-child {
+    display: block;
+    font-size: 20px;
+    color: gray;
+  }
+}
+
+.recommendedTracks {
+  font-size: 25px;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 10px;
+
+
+  @media (max-width: 600px) {
+    font-size: 18px;
+  }
+}
+
+.title {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+
+  span {
+    display: inline-block;
+    width: 200px;
+    height: 40px;
+
+    img {
+      border-radius: 5px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.container {
+  background-color: #001529;
+  height: calc(100vh - 77px);
+  margin: 0 -10px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 70px 20px 20px 20px;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+
+  h2 {
+    margin-top: 50px;
+    color: white;
+
+    span {
+      display: inline-block;
+      height: 50px;
+      width: 167px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+  }
+
+  p {
+    margin-bottom: 100px;
+  }
+
+  @media (max-width: 750px) {
+    padding: 20px;
+    height: calc(100vh - 136px);
+
+    h2 {
+      margin-top: 30px;
+    }
+    p {
+      margin-bottom: 50px;
+    }
+  }
+
+}
+
+.btn {
+  width: 300px;
+  @media (max-width: 500px) {
+    width: 200px;
+    font-size: 12px;
+  }
 }

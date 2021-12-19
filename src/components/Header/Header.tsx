@@ -1,6 +1,6 @@
 import {Button, makeStyles} from "@material-ui/core";
 import React from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import s from './Header.module.scss'
 import {Avatar, Layout} from "antd";
 import {useDispatch, useSelector} from "react-redux";
@@ -19,8 +19,10 @@ export const Header: React.FC = (props) => {
    const avatar = useSelector<AppRootStateT, PhotoType | null>(state => state.auth.photo)
 
    const onClickHandlerLogout = () => {
+
       dispatch(logout())
-      navigate('/')
+
+      setTimeout(() => navigate('/'), 100)
    }
 
    const onClickHandlerLogin = () => navigate('/login')

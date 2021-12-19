@@ -24,13 +24,56 @@ code {
     background: rgba(255, 255, 255, 0.3);
 }
 
-
 .site-layout .site-layout-background {
     background: #fff;
 }
 
-.logo {
-    height: 32px;
-    margin: 16px;
-    background: rgba(255, 255, 255, 0.3);
+._SliderRSWP {
+    margin-bottom: 10px;
+}
+
+.rswp__active {
+    border: none !important;
+}
+
+
+@media (max-width: 1024px) {
+    ._ContentRSWP {
+        flex-direction: row !important;
+    }
+
+    ._ControlsRSWP {
+        transform: translateX(50%);
+        position: relative;
+        left: -50%;
+    }
+}
+
+@media (max-width: 600px) {
+    ._ControlsRSWP {
+        flex-direction: row !important;
+        transform: translateX(50%);
+        position: relative;
+        left: -50%;
+
+    }
+
+    ._ContentRSWP {
+        flex-direction: column !important;
+    }
+
+    ._ActionsRSWP {
+        display: none !important;
+    }
+
+    .rswp__active {
+        justify-content: space-between;
+    }
+
+}
+
+@media (max-width: 750px) {
+    /*.PlayerRSWP {*/
+    /*    padding: 5px;*/
+    /*}*/
 }

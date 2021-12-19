@@ -11,16 +11,15 @@ import {
 import {Message} from "./Message";
 import {SendMessageForm} from "./SendMessageForm";
 import {Tooltip} from "../common/Tooltip/Tooltip";
+import {useNavigate} from "react-router-dom";
 
 export const Chat: React.FC = () => {
    const wsStatus = useSelector<AppRootStateT, WS_STATUS>(state => state.chat.status)
-
    const messages = useSelector<AppRootStateT, ChatMessageT[]>(state => state.chat.messages)
-
    const wsError = useSelector<AppRootStateT, boolean>(state => state.chat.error)
+   const isAuth = useSelector<AppRootStateT, boolean>(state => state.auth.isAuth)
 
    const [autoScroll, setAutoScroll] = useState<boolean>(false)
-
    const [startScroll, setStartScroll] = useState<boolean>(false)
 
    const usersMessages = messages.map((user) => <Message key={user.id} user={user}/>)
@@ -29,8 +28,12 @@ export const Chat: React.FC = () => {
 
    const dispatch = useDispatch()
 
+   const navigate = useNavigate()
+
 
    useEffect(() => {
+      if (!isAuth) return navigate('/')
+
       dispatch(startMessagesListening())
 
       return () => {

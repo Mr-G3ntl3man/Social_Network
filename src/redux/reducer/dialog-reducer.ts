@@ -1,6 +1,4 @@
 import {v1} from "uuid";
-import {ThunkAction} from "redux-thunk";
-import {AppRootStateT} from "../redux-store";
 
 enum ACTION_TYPE_DIALOGS {
    ADD_MESSAGE = 'ADD_MESSAGE',

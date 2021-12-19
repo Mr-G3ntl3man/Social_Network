@@ -41,7 +41,7 @@ export const appReducer = (state = initialState, action: ActionType): AppStateTy
          return {
             ...state,
             catchError: {
-               error: true,
+               error: action.error,
                messageError: action.message,
                severity: action.severity
             }
@@ -53,10 +53,11 @@ export const appReducer = (state = initialState, action: ActionType): AppStateTy
 }
 
 const setInitialized = () => ({type: ACTION_TYPE_APP.SUCCESSFUL_INITIALIZATION} as const)
-const catchError = (message: string | null, severity: SeverityTooltipType) => ({
+const catchError = (error: boolean, message: string | null, severity: SeverityTooltipType) => ({
    type: ACTION_TYPE_APP.CATCH_ERROR,
    message,
-   severity
+   severity,
+   error
 } as const)
 
 export const initializedApp = (): ThunkActionT =>
@@ -67,7 +68,7 @@ export const initializedApp = (): ThunkActionT =>
    }
 
 export const installCaughtError = (message: string, severity: SeverityTooltipType) => (dispatch: Dispatch<ActionType>) => {
-   dispatch(catchError(message, severity))
+   dispatch(catchError(true, message, severity))
 
-   setTimeout(() => dispatch(catchError(null, "info")), 2000)
+   setTimeout(() => dispatch(catchError(false, null, "info")), 2000)
 }

@@ -6,6 +6,7 @@ import {authReducer} from "./reducer/auth-reducer";
 import thunk from 'redux-thunk'
 import {appReducer} from "./reducer/app-reducer";
 import {chatReducer} from "./reducer/chat-reducer";
+import {spotifyReducer} from "./reducer/spotify-reducer";
 
 const rootReducer = combineReducers({
    profilePage: profileReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
    usersPage: usersReducer,
    auth: authReducer,
    app: appReducer,
-   chat: chatReducer
+   chat: chatReducer,
+   spotify: spotifyReducer
 })
 
 export type AppRootStateT = ReturnType<typeof rootReducer>
