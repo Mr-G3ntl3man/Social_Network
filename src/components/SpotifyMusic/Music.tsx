@@ -10,6 +10,7 @@ const code = new URLSearchParams(window.location.search).get("code")
 export const Music = () => {
    const isFetching = useSelector<AppRootStateT, boolean>(state => state.spotify.isFetching)
 
+
    return (
       <>
          {isFetching && <Preloader/>}

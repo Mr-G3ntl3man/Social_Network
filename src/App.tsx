@@ -1,5 +1,5 @@
 import React, {useEffect, useCallback, FC} from 'react';
-import {BrowserRouter, HashRouter} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateT} from "./redux/redux-store";
 import {Preloader} from "./components/common/Preloader/Preloader";

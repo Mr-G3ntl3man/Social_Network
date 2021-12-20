@@ -2,7 +2,6 @@ import {ThunkAction} from "redux-thunk";
 import {spotifyAPI} from "../../api/spotify-api";
 import {AppRootStateT} from "../redux-store";
 import {installCaughtError} from "./app-reducer";
-import {saveState} from "./localStorage/localStorage";
 
 export enum ACTION_TYPE_SPOTIFY {
    SET_TOKEN_INFO = 'social_network/spotify/SET_ACCESS_TOKEN',
@@ -13,7 +12,6 @@ export enum ACTION_TYPE_SPOTIFY {
    SET_SEARCH_RESULTS = 'social_network/spotify/SET_SEARCH_RESULTS',
    SET_SEARCH = 'social_network/spotify/SET_SEARCH',
    SET_RECOMMENDED_TRACKS = 'social_network/spotify/SET_RANDOM_PLAYLIST',
-   SET_AUTH = 'social_network/spotify/SET_AUTH',
 }
 
 export type SearchResultsT = {
@@ -41,7 +39,6 @@ export type spotifyStateT = {
    dashboard: DashboardT
    recommendedTracks: SearchResultsT[]
    isFetching: boolean
-   isAuth: boolean
 }
 
 type ActionT = ReturnType<typeof setTokenInfo>
@@ -52,7 +49,6 @@ type ActionT = ReturnType<typeof setTokenInfo>
    | ReturnType<typeof setSearchResults>
    | ReturnType<typeof setSearch>
    | ReturnType<typeof setRecommendedTracks>
-   | ReturnType<typeof setIsAuth>
 
 type ThunkActionT = ThunkAction<void, AppRootStateT, unknown, ActionT>
 
@@ -70,7 +66,6 @@ const initialState: spotifyStateT = {
    },
    recommendedTracks: [],
    isFetching: false,
-   isAuth: false
 }
 
 
@@ -114,9 +109,6 @@ export const spotifyReducer = (state = initialState, action: ActionT): spotifySt
       case ACTION_TYPE_SPOTIFY.SET_RECOMMENDED_TRACKS:
          return {...state, recommendedTracks: action.playlist}
 
-      case ACTION_TYPE_SPOTIFY.SET_AUTH:
-         return {...state, ...action.auth}
-
       default:
          return state
    }
@@ -124,10 +116,6 @@ export const spotifyReducer = (state = initialState, action: ActionT): spotifySt
 
 const setTokenInfo = (token: TokenT) => ({
    type: ACTION_TYPE_SPOTIFY.SET_TOKEN_INFO, token
-} as const)
-
-export const setIsAuth = (auth: { isAuth: boolean }) => ({
-   type: ACTION_TYPE_SPOTIFY.SET_AUTH, auth
 } as const)
 
 const refreshTokenInfo = (token: { refreshToken: string, expiresIn: number }) => ({
@@ -167,8 +155,6 @@ export const loginTokenSpotify = (code: string): ThunkActionT =>
          const response = await spotifyAPI.loginToken(code)
 
          dispatch(setTokenInfo(response))
-
-         saveState<{ isAuth: boolean }>('authSpotify', {isAuth: true})
 
          dispatch(setLoadingData(false))
       } catch (error) {
