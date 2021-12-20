@@ -10,6 +10,7 @@ export enum ACTION_TYPE_AUTH {
    SET_RESULT_STATUS = 'social_network/auth/SET_RESULT_STATUS',
    GET_CAPTCHA_SUCCESS = 'social_network/auth/GET_CAPTCHA_SUCCESS',
    SET_PHOTO = 'social_network/auth/SET_PHOTO',
+   SET_LOGOUT = 'social_network/auth/SET_LOGOUT',
 }
 
 export type FormDataType = {
@@ -29,6 +30,7 @@ export type AuthStateType = {
    userData: UserDataType | null
    photo: PhotoType | null
    isAuth: boolean
+   logout: boolean
    statusMessages: string
    resultStatusMessage: boolean
    captchaUrl: string | null
@@ -38,12 +40,14 @@ type ActionType = ReturnType<typeof setUserDataAC>
    | ReturnType<typeof setStatusMessAC>
    | ReturnType<typeof getCaptchaUrlSuccess>
    | ReturnType<typeof setAuthorizedUserPhoto>
+   | ReturnType<typeof setLogout>
 
 type ThunkActionT = ThunkAction<void, AppRootStateT, unknown, ActionType>
 
 const initialState: AuthStateType = {
    userData: null,
    isAuth: false,
+   logout: false,
    photo: null,
    statusMessages: '',
    resultStatusMessage: true,
@@ -67,6 +71,9 @@ export const authReducer = (state = initialState, action: ActionType): AuthState
       case ACTION_TYPE_AUTH.SET_PHOTO:
          return {...state, photo: action.photo}
 
+      case ACTION_TYPE_AUTH.SET_LOGOUT:
+         return {...state, logout: action.logout}
+
       default:
          return state
    }
@@ -77,6 +84,12 @@ export const setUserDataAC = (userData: UserDataType | null, isAuth: boolean) =>
       type: ACTION_TYPE_AUTH.SET_USER_DATA,
       userData,
       isAuth,
+   } as const
+}
+
+const setLogout = (logout: boolean) => {
+   return {
+      type: ACTION_TYPE_AUTH.SET_LOGOUT, logout
    } as const
 }
 
@@ -106,7 +119,7 @@ export const getCaptchaUrlSuccess = (url: string) => ({
    url
 } as const)
 
-export const setAuthorizedUserPhoto = (photo: PhotoType) => ({
+export const setAuthorizedUserPhoto = (photo: PhotoType | null) => ({
    type: ACTION_TYPE_AUTH.SET_PHOTO,
    photo
 } as const)
@@ -121,6 +134,8 @@ export const login = (data: FormDataType): ThunkActionT => {
       if (response.resultCode === RESULT_CODE.SUCCESSFULLY) {
          dispatch(setStatusMessAC('Successful login', true))
 
+         dispatch(setLogout(false))
+
          await dispatch(getUserData())
       }
    }
@@ -130,7 +145,12 @@ export const logout = (): ThunkActionT => {
    return async (dispatch) => {
       const response = await authAPI.logout()
 
-      response.data.resultCode === RESULT_CODE.SUCCESSFULLY && dispatch(setUserDataAC(null, false))
+      if (response.data.resultCode === RESULT_CODE.SUCCESSFULLY) {
+         dispatch(setUserDataAC(null, false))
+         dispatch(setAuthorizedUserPhoto(null))
+         dispatch(setLogout(true))
+      }
+
       response.data.resultCode !== RESULT_CODE.SUCCESSFULLY && dispatch(installCaughtError(response.data.messages[0], 'warning'))
    }
 }

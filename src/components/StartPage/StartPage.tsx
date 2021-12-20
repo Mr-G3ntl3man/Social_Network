@@ -10,9 +10,12 @@ import {PATH} from "../../Router/Routes";
 
 export const StartPage: React.FC = () => {
    const isAuth = useSelector<AppRootStateT, boolean>(state => state.auth.isAuth)
+   const isAuthSpotify = useSelector<AppRootStateT, boolean>(state => state.spotify.isAuth)
+   const isLogout = useSelector<AppRootStateT, boolean>(state => state.auth.logout)
    const authorizedUser = useSelector<AppRootStateT, UserDataType | null>(state => state.auth.userData)
 
    if (isAuth) return <Navigate replace to={`/Social_Network/profile/${authorizedUser?.id}`}/>
+   if (isAuthSpotify || !isLogout) return <Navigate replace to={PATH.SPOTIFY_MUSIC}/>
 
    return (
       <div className={s.wrap}>

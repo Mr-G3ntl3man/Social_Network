@@ -12,6 +12,7 @@ export enum ACTION_TYPE_SPOTIFY {
    SET_SEARCH_RESULTS = 'social_network/spotify/SET_SEARCH_RESULTS',
    SET_SEARCH = 'social_network/spotify/SET_SEARCH',
    SET_RECOMMENDED_TRACKS = 'social_network/spotify/SET_RANDOM_PLAYLIST',
+   SET_AUTH = 'social_network/spotify/SET_AUTH',
 }
 
 export type SearchResultsT = {
@@ -39,6 +40,7 @@ export type spotifyStateT = {
    dashboard: DashboardT
    recommendedTracks: SearchResultsT[]
    isFetching: boolean
+   isAuth: boolean
 }
 
 type ActionT = ReturnType<typeof setTokenInfo>
@@ -49,6 +51,7 @@ type ActionT = ReturnType<typeof setTokenInfo>
    | ReturnType<typeof setSearchResults>
    | ReturnType<typeof setSearch>
    | ReturnType<typeof setRecommendedTracks>
+   | ReturnType<typeof setIsAuth>
 
 type ThunkActionT = ThunkAction<void, AppRootStateT, unknown, ActionT>
 
@@ -65,7 +68,8 @@ const initialState: spotifyStateT = {
       playingTrack: null
    },
    recommendedTracks: [],
-   isFetching: false
+   isFetching: false,
+   isAuth: false
 }
 
 
@@ -118,6 +122,10 @@ const setTokenInfo = (token: TokenT) => ({
    type: ACTION_TYPE_SPOTIFY.SET_TOKEN_INFO, token
 } as const)
 
+const setIsAuth = (auth: boolean) => ({
+   type: ACTION_TYPE_SPOTIFY.SET_AUTH, auth
+} as const)
+
 const refreshTokenInfo = (token: { refreshToken: string, expiresIn: number }) => ({
    type: ACTION_TYPE_SPOTIFY.REFRESH_TOKEN_INFO,
    token
@@ -155,6 +163,8 @@ export const loginTokenSpotify = (code: string): ThunkActionT =>
          const response = await spotifyAPI.loginToken(code)
 
          dispatch(setTokenInfo(response))
+         
+         dispatch(setIsAuth(true))
 
          dispatch(setLoadingData(false))
       } catch (error) {
