@@ -11,18 +11,19 @@ const UsersContainer = React.lazy(() => import('../components/Users/UsersContain
 const GeneralChat = React.lazy(() => import('../components/GeneralChat/Chat'));
 
 enum PATH {
-   LOGIN = '/login',
-   PROFILE_USER = '/profile/:userId',
-   CHAT = '/chat',
-   USERS = '/users',
-   SPOTIFY_MUSIC = '/spotifyMusic',
+   HOME = "/Social_Network",
+   LOGIN = '/Social_Network/login',
+   PROFILE_USER = '/Social_Network/profile/:userId',
+   CHAT = '/Social_Network/chat',
+   USERS = '/Social_Network/users',
+   SPOTIFY_MUSIC = '/Social_Network/spotifyMusic',
 }
 
 export const Routers = () => {
    return (
       <Suspense fallback={<Preloader/>}>
          <Routes>
-            <Route index element={<StartPage/>}/>
+            <Route path={PATH.HOME} element={<StartPage/>}/>
             <Route path={PATH.LOGIN} element={<LoginFormContainer/>}/>
             <Route path={PATH.PROFILE_USER} element={<ProfileContainer/>}/>
             <Route path={PATH.CHAT} element={<GeneralChat/>}/>
