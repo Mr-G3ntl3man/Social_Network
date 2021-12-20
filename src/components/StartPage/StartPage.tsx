@@ -6,6 +6,7 @@ import {AppRootStateT} from "../../redux/redux-store";
 import {UserDataType} from "../../redux/reducer/auth-reducer";
 import {Navigate} from "react-router-dom";
 import rocket from '../../image/rocket.png'
+import {PATH} from "../../Router/Routes";
 
 export const StartPage: React.FC = () => {
    const isAuth = useSelector<AppRootStateT, boolean>(state => state.auth.isAuth)
@@ -33,7 +34,7 @@ export const StartPage: React.FC = () => {
             {/*</div>*/}
             <div className={s.btnGroup}>
                <NeonBtn goAnotherSite={true} link={'https://social-network.samuraijs.com/signUp'} name={'Register'}/>
-               <NeonBtn goAnotherSite={false} link={'/login'} name={'Login'}/>
+               <NeonBtn goAnotherSite={false} link={PATH.LOGIN} name={'Login'}/>
             </div>
          </div>
       </div>
