@@ -2,9 +2,7 @@ import React from 'react';
 import {NeonBtn} from "../common/NeonBtn/NeonBtn";
 import s from './music.module.scss'
 import logo from '../../image/SpotifyIcon.svg'
-
-const AUTH_URL =
-   "https://accounts.spotify.com/authorize?client_id=ea7ec046e46f4faea91091b10e65d993&response_type=code&redirect_uri=http://localhost:3000/spotifyMusic&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state"
+import {AUTH_URL} from "../../api/spotify-api";
 
 export const LoginSpotify: React.FC = () => {
    return (
@@ -13,6 +11,10 @@ export const LoginSpotify: React.FC = () => {
 
          <p>
             Yo! You can listen to music from Spotify. To do this, you need to log in!
+         </p>
+         <p>
+            Spotify makes it easy to find music or podcasts for any situation, as our service is available on phones,
+            computers, tablets and other devices.
          </p>
 
          <NeonBtn

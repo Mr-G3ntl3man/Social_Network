@@ -2,7 +2,7 @@
   "name": "social_network",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mrgentelman.github.io/Social_network_React_Redux",
+  "homepage": "https://mrgentelman.github.io/Social_Network/",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@emotion/react": "^11.5.0",

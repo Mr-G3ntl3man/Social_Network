@@ -5,6 +5,7 @@ import {useSelector} from "react-redux";
 import {AppRootStateT} from "../../redux/redux-store";
 import {UserDataType} from "../../redux/reducer/auth-reducer";
 import {Navigate} from "react-router-dom";
+import rocket from '../../image/rocket.png'
 
 export const StartPage: React.FC = () => {
    const isAuth = useSelector<AppRootStateT, boolean>(state => state.auth.isAuth)
@@ -15,7 +16,7 @@ export const StartPage: React.FC = () => {
    return (
       <div className={s.wrap}>
 
-         <h1 className={s.mainTitle}>Social Network 🚀</h1>
+         <h1 className={s.mainTitle}>Social Network <span><img src={rocket} alt="rocket"/></span></h1>
 
          <p className={s.desc}>
             Yo stranger, this is SPA a small social network, a pet project on which a juniors developer trains.
@@ -25,11 +26,11 @@ export const StartPage: React.FC = () => {
             <a target='blank' href="https://github.com/MrGentelman/Social_network_React_Redux">GitHub</a>
          </p>
          <div className={s.descTeh}>
-            <span>To test the application, register or log in or use common test account credentials: </span>
-            <div className={s.accountCredentials}>
-               <span>Email: free@samuraijs.com</span>
-               <span>Password: free</span>
-            </div>
+            <span>To test the application, register or log in!</span>
+            {/*<div className={s.accountCredentials}>*/}
+            {/*   <span>Email: free@samuraijs.com</span>*/}
+            {/*   <span>Password: free</span>*/}
+            {/*</div>*/}
             <div className={s.btnGroup}>
                <NeonBtn goAnotherSite={true} link={'https://social-network.samuraijs.com/signUp'} name={'Register'}/>
                <NeonBtn goAnotherSite={false} link={'/login'} name={'Login'}/>

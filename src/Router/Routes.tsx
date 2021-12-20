@@ -10,16 +10,24 @@ import {Music} from "../components/SpotifyMusic/Music";
 const UsersContainer = React.lazy(() => import('../components/Users/UsersContainer'));
 const GeneralChat = React.lazy(() => import('../components/GeneralChat/Chat'));
 
+enum PATH {
+   LOGIN = '/login',
+   PROFILE_USER = '/profile/:userId',
+   CHAT = '/chat',
+   USERS = '/users',
+   SPOTIFY_MUSIC = '/spotifyMusic',
+}
+
 export const Routers = () => {
    return (
       <Suspense fallback={<Preloader/>}>
          <Routes>
-            <Route path={'/'} element={<StartPage/>}/>
-            <Route path={'/login'} element={<LoginFormContainer/>}/>
-            <Route path={'/profile/:userId'} element={<ProfileContainer/>}/>
-            <Route path={'/chat'} element={<GeneralChat/>}/>
-            <Route path={'/users'} element={<UsersContainer/>}/>
-            <Route path={'/spotifyMusic'} element={<Music/>}/>
+            <Route index element={<StartPage/>}/>
+            <Route path={PATH.LOGIN} element={<LoginFormContainer/>}/>
+            <Route path={PATH.PROFILE_USER} element={<ProfileContainer/>}/>
+            <Route path={PATH.CHAT} element={<GeneralChat/>}/>
+            <Route path={PATH.USERS} element={<UsersContainer/>}/>
+            <Route path={PATH.SPOTIFY_MUSIC} element={<Music/>}/>
             <Route path={'*'} element={<NotFound/>}/>
          </Routes>
       </Suspense>
