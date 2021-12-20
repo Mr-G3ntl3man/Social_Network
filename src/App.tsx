@@ -40,7 +40,7 @@ const App: FC = () => {
    }
 
    return (
-      <BrowserRouter>
+      <HashRouter>
          <Layout>
             <Header/>
             <Layout className={s.layoutSider} style={{minHeight: '100vh', margin: '15px 0 0 0'}}>
@@ -59,7 +59,7 @@ const App: FC = () => {
             messages={catchError.messageError}
             severity={catchError.severity} open={catchError.error}
             anchorOrigin={{vertical: 'top', horizontal: 'center'}}/>}
-      </BrowserRouter>
+      </HashRouter>
    )
 }
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import SpotifyWebApi from "spotify-web-api-node";
 
 export const AUTH_URL =
-   "https://accounts.spotify.com/authorize?client_id=ea7ec046e46f4faea91091b10e65d993&response_type=code&redirect_uri=https://mrgentelman.github.io/Social_Network/spotifyMusic&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state"
+   "https://accounts.spotify.com/authorize?client_id=ea7ec046e46f4faea91091b10e65d993&response_type=code&redirect_uri=https://mrgentelman.github.io/Social_Network/#/spotifyMusic&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state"
 
 
 const instance = axios.create({
