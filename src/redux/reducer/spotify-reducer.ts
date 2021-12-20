@@ -2,6 +2,7 @@ import {ThunkAction} from "redux-thunk";
 import {spotifyAPI} from "../../api/spotify-api";
 import {AppRootStateT} from "../redux-store";
 import {installCaughtError} from "./app-reducer";
+import {saveState} from "./localStorage/localStorage";
 
 export enum ACTION_TYPE_SPOTIFY {
    SET_TOKEN_INFO = 'social_network/spotify/SET_ACCESS_TOKEN',
@@ -114,7 +115,7 @@ export const spotifyReducer = (state = initialState, action: ActionT): spotifySt
          return {...state, recommendedTracks: action.playlist}
 
       case ACTION_TYPE_SPOTIFY.SET_AUTH:
-         return {...state, isAuth: action.auth}
+         return {...state, ...action.auth}
 
       default:
          return state
@@ -125,7 +126,7 @@ const setTokenInfo = (token: TokenT) => ({
    type: ACTION_TYPE_SPOTIFY.SET_TOKEN_INFO, token
 } as const)
 
-const setIsAuth = (auth: boolean) => ({
+export const setIsAuth = (auth: { isAuth: boolean }) => ({
    type: ACTION_TYPE_SPOTIFY.SET_AUTH, auth
 } as const)
 
@@ -167,7 +168,7 @@ export const loginTokenSpotify = (code: string): ThunkActionT =>
 
          dispatch(setTokenInfo(response))
 
-         dispatch(setIsAuth(true))
+         saveState<{ isAuth: boolean }>('authSpotify', {isAuth: true})
 
          dispatch(setLoadingData(false))
       } catch (error) {
@@ -239,7 +240,6 @@ export const getSearchResults = (search: string, cancelSearch: boolean): ThunkAc
 
          const res = await spotifyAPI.searchTracks(search)
 
-         console.log(res)
          if (cancelSearch) return
 
          dispatch(setSearchResults(res.body.tracks ? res.body.tracks.items.map(setTracks) : []))
