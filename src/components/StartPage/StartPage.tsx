@@ -15,7 +15,7 @@ export const StartPage: React.FC = () => {
    const authorizedUser = useSelector<AppRootStateT, UserDataType | null>(state => state.auth.userData)
 
    if (isAuth) return <Navigate replace to={`/Social_Network/profile/${authorizedUser?.id}`}/>
-   if (isAuthSpotify || isLogout) return <Navigate replace to={PATH.SPOTIFY_MUSIC}/>
+   if (isAuthSpotify && !isLogout) return <Navigate replace to={PATH.SPOTIFY_MUSIC}/>
 
    return (
       <div className={s.wrap}>
