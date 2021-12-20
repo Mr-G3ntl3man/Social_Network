@@ -113,6 +113,9 @@ export const spotifyReducer = (state = initialState, action: ActionT): spotifySt
       case ACTION_TYPE_SPOTIFY.SET_RECOMMENDED_TRACKS:
          return {...state, recommendedTracks: action.playlist}
 
+      case ACTION_TYPE_SPOTIFY.SET_AUTH:
+         return {...state, isAuth: action.auth}
+
       default:
          return state
    }
@@ -163,7 +166,7 @@ export const loginTokenSpotify = (code: string): ThunkActionT =>
          const response = await spotifyAPI.loginToken(code)
 
          dispatch(setTokenInfo(response))
-         
+
          dispatch(setIsAuth(true))
 
          dispatch(setLoadingData(false))
