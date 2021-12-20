@@ -10,7 +10,7 @@ import {Music} from "../components/SpotifyMusic/Music";
 const UsersContainer = React.lazy(() => import('../components/Users/UsersContainer'));
 const GeneralChat = React.lazy(() => import('../components/GeneralChat/Chat'));
 
-enum PATH {
+export enum PATH {
    HOME = "/Social_Network",
    LOGIN = '/Social_Network/login',
    PROFILE_USER = '/Social_Network/profile/:userId',

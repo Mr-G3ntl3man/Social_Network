@@ -12,6 +12,7 @@ import {Message} from "./Message";
 import {SendMessageForm} from "./SendMessageForm";
 import {Tooltip} from "../common/Tooltip/Tooltip";
 import {useNavigate} from "react-router-dom";
+import {PATH} from "../../Router/Routes";
 
 export const Chat: React.FC = () => {
    const wsStatus = useSelector<AppRootStateT, WS_STATUS>(state => state.chat.status)
@@ -32,7 +33,7 @@ export const Chat: React.FC = () => {
 
 
    useEffect(() => {
-      if (!isAuth) return navigate('/')
+      if (!isAuth) return navigate(PATH.HOME)
 
       dispatch(startMessagesListening())
 

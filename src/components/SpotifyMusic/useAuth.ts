@@ -3,6 +3,7 @@ import {useNavigate,} from "react-router-dom";
 import {loginTokenSpotify, refreshTokenSpotify} from "../../redux/reducer/spotify-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateT} from "../../redux/redux-store";
+import {PATH} from "../../Router/Routes";
 
 export const useAuth = (code: string) => {
    const accessToken = useSelector<AppRootStateT, string>(state => state.spotify.token.accessToken)
@@ -16,7 +17,7 @@ export const useAuth = (code: string) => {
    useEffect(() => {
       if (!accessToken) dispatch(loginTokenSpotify(code))
 
-      navigate('/spotifyMusic')
+      navigate(PATH.SPOTIFY_MUSIC)
    }, [code])
 
    useEffect(() => {
@@ -25,7 +26,7 @@ export const useAuth = (code: string) => {
       const interval = setInterval(() => {
          dispatch(refreshTokenSpotify(refreshToken))
 
-         navigate('/spotifyMusic')
+         navigate(PATH.SPOTIFY_MUSIC)
       }, (expiresIn - 60) * 1000)
 
       return () => clearInterval(interval)

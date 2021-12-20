@@ -8,6 +8,7 @@ import {AppRootStateT} from "../../redux/redux-store";
 import {getAuthorizedUserId, getProfile, getProfileStatus} from "../../redux/selectors/profile-selector";
 import {useNavigate, useParams} from "react-router-dom";
 import {MyPosts} from "./MyPosts/MyPosts";
+import {PATH} from "../../Router/Routes";
 
 
 export type ProfileContainerType = MapStateToPropsType & MapDispatchToPropsType
@@ -23,7 +24,7 @@ export const Profile: React.FC<ProfileContainerType> = (props) => {
    useEffect(() => {
       let id = isNaN(Number(userId)) ? authorizedUserId : Number(userId)
 
-      if (!id) return navigate('/login')
+      if (!id) return navigate(PATH.LOGIN)
 
       setUserProfile(id)
       getStatus(id)

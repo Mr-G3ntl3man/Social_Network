@@ -23,7 +23,7 @@ export const LoginPage: React.FC = () => {
    const authorizedUser = useSelector<AppRootStateT, UserDataType | null>(state => state.auth.userData)
 
    if (isAuth) {
-      return <Navigate to={authorizedUser ? `/profile/${authorizedUser.id}` : '/login'}/>
+      return <Navigate to={authorizedUser ? `/Social_Network/profile/${authorizedUser.id}` : '/login'}/>
    }
 
    return <LoginForm/>

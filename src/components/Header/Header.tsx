@@ -7,9 +7,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {AuthStateType, logout} from "../../redux/reducer/auth-reducer";
 import {AppRootStateT} from "../../redux/redux-store";
 import {PhotoType} from "../../redux/reducer/profile-reducer";
+import {PATH} from "../../Router/Routes";
 
 
-export const Header: React.FC = (props) => {
+export const Header: React.FC = () => {
    const navigate = useNavigate()
 
    const dispatch = useDispatch()
@@ -22,10 +23,10 @@ export const Header: React.FC = (props) => {
 
       dispatch(logout())
 
-      setTimeout(() => navigate('/'), 100)
+      setTimeout(() => navigate(PATH.HOME), 100)
    }
 
-   const onClickHandlerLogin = () => navigate('/login')
+   const onClickHandlerLogin = () => navigate(PATH.LOGIN)
 
    const style = makeStyles(() => ({
       default: {

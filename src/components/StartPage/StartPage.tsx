@@ -11,7 +11,7 @@ export const StartPage: React.FC = () => {
    const isAuth = useSelector<AppRootStateT, boolean>(state => state.auth.isAuth)
    const authorizedUser = useSelector<AppRootStateT, UserDataType | null>(state => state.auth.userData)
 
-   if (isAuth) return <Navigate replace to={`/profile/${authorizedUser?.id}`}/>
+   if (isAuth) return <Navigate replace to={`/Social_Network/profile/${authorizedUser?.id}`}/>
 
    return (
       <div className={s.wrap}>

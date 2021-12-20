@@ -7,6 +7,7 @@ import {Layout, Menu} from "antd";
 import {CommentOutlined, CustomerServiceOutlined, ProfileOutlined, UserOutlined} from "@ant-design/icons";
 import {ButtonBurger} from "../common/ButtonBurger/ButtonBurger";
 import s from './Sidebar.module.scss'
+import {PATH} from "../../Router/Routes";
 
 export const Sidebar = () => {
    const authorizedUser = useSelector<AppRootStateT, UserDataType | null>(state => state.auth.userData)
@@ -51,19 +52,19 @@ export const Sidebar = () => {
             </div>
             <Menu theme="dark" mode="inline">
                <Menu.Item key="1" icon={<ProfileOutlined/>}>
-                  <Link to={authorizedUser ? `/profile/${authorizedUser.id}` : '/'}>Profile</Link>
+                  <Link to={authorizedUser ? `/Social_Network/profile/${authorizedUser.id}` : PATH.HOME}>Profile</Link>
                </Menu.Item>
 
                <Menu.Item key="2" icon={<UserOutlined/>}>
-                  <Link to="/users">Users</Link>
+                  <Link to={PATH.USERS}>Users</Link>
                </Menu.Item>
 
                <Menu.Item key="3" icon={<CommentOutlined/>}>
-                  <Link to="/chat">General Chat</Link>
+                  <Link to={PATH.CHAT}>General Chat</Link>
                </Menu.Item>
 
                <Menu.Item key="4" icon={<CustomerServiceOutlined/>}>
-                  <Link to="/spotifyMusic">Spotify Music</Link>
+                  <Link to={PATH.SPOTIFY_MUSIC}>Spotify Music</Link>
                </Menu.Item>
             </Menu>
          </div>
