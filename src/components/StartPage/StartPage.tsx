@@ -26,21 +26,21 @@ export const StartPage: React.FC = () => {
          <p className={s.desc}>
             Yo stranger, this is SPA a small social network, a pet project on which a juniors developer trains.
          </p>
-         <p className={s.desc}>
-            To see the entire stack that I have used go to my
-            <a target='blank' href="https://github.com/MrGentelman/Social_network_React_Redux">GitHub</a>
-         </p>
          <div className={s.descTeh}>
-            <span>To test the application, register or log in!</span>
-            {/*<div className={s.accountCredentials}>*/}
-            {/*   <span>Email: free@samuraijs.com</span>*/}
-            {/*   <span>Password: free</span>*/}
-            {/*</div>*/}
+            <span>To test the application, register or use common test account for testing!</span>
+            <div className={s.accountCredentials}>
+               <span className={s.testInfo}> <span>Email:</span> pecab31632@ritumusic.com</span>
+               <span className={s.testInfo}> <span>Password:</span>  Account_For_Test</span>
+            </div>
             <div className={s.btnGroup}>
                <NeonBtn goAnotherSite={true} link={'https://social-network.samuraijs.com/signUp'} name={'Register'}/>
                <NeonBtn goAnotherSite={false} link={PATH.LOGIN} name={'Login'}/>
             </div>
          </div>
+         <p className={s.desc}>
+            To see the entire stack that I have used go to my
+            <a target='blank' href="https://github.com/MrGentelman/Social_network_React_Redux">GitHub</a>
+         </p>
       </div>
    )
 }

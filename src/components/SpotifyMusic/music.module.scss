@@ -195,6 +195,16 @@
       }
     }
 
+    @media (max-width: 450px) {
+      span {
+        height: 35px;
+        width: 120px;
+      }
+
+      font-size: 20px;
+    }
+
+
   }
 
   p {
@@ -225,5 +235,37 @@
   @media (max-width: 500px) {
     width: 200px;
     font-size: 12px;
+  }
+}
+
+.dev {
+  color: orange;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+.accountCredentials {
+  text-align: center;
+
+
+  span {
+    font-family: 'Inconsolata', monospace;
+    display: block;
+    font-size: 27px;
+    font-weight: 500;
+    color: orange;
+  }
+
+  @media (max-width: 750px) {
+
+    span {
+      font-size: 25px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    span {
+      font-size: 20px;
+    }
   }
 }

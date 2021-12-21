@@ -17,7 +17,6 @@ export const useAuth = (code: string) => {
    useEffect(() => {
       if (!accessToken) dispatch(loginTokenSpotify(code))
 
-
       navigate(PATH.SPOTIFY_MUSIC)
    }, [code, dispatch])
 

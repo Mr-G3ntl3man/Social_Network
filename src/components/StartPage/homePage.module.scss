@@ -46,6 +46,10 @@
   @media (max-width: 510px) {
     font-size: 30px;
     border-right: 3px solid orange;
+    span {
+      width: 40px;
+      height: 40px;
+    }
   }
 }
 
@@ -71,6 +75,7 @@
   color: white;
   width: 700px;
   text-align: center;
+
 
   @media (max-width: 950px) {
     width: auto;
@@ -122,32 +127,32 @@
   font-size: 25px;
   color: white;
   text-align: center;
-  margin-top: 20px;
 
 
   @media (max-width: 450px) {
     font-size: 20px;
     margin: 10px;
   }
+
+  span:first-child {
+    display: inline-block;
+    margin-bottom: 10px;
+  }
 }
 
 .accountCredentials {
-  text-align: left;
-  padding-top: 10px;
-  margin: 0 auto;
-  max-width: 380px;
+  text-align: center;
+
 
   span {
     font-family: 'Inconsolata', monospace;
     display: block;
-    margin: 5px 0;
-    font-size: 30px;
+    font-size: 27px;
     font-weight: 500;
     color: orange;
   }
 
   @media (max-width: 750px) {
-    max-width: 315px;
 
     span {
       font-size: 25px;
@@ -155,8 +160,6 @@
   }
 
   @media (max-width: 420px) {
-    max-width: none;
-    text-align: center;
     span {
       font-size: 20px;
     }
@@ -164,5 +167,13 @@
 }
 
 .btnGroup {
-  margin-top: 10px;
+  margin: 10px 0;
+}
+
+.testInfo {
+  @media (max-width: 500px) {
+    span:first-child {
+      display: block;
+    }
+  }
 }
