@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Social_Network/static/css/main.682052b1.chunk.css",
+    "main.css": "/Social_Network/static/css/main.02ee9590.chunk.css",
     "main.js": "/Social_Network/static/js/main.a9c2450b.chunk.js",
     "main.js.map": "/Social_Network/static/js/main.a9c2450b.chunk.js.map",
     "runtime-main.js": "/Social_Network/static/js/runtime-main.b539f81b.js",
@@ -22,7 +22,7 @@
     "static/css/2.2b8316e7.chunk.css.map": "/Social_Network/static/css/2.2b8316e7.chunk.css.map",
     "static/css/4.94591e20.chunk.css.map": "/Social_Network/static/css/4.94591e20.chunk.css.map",
     "static/css/5.8554a259.chunk.css.map": "/Social_Network/static/css/5.8554a259.chunk.css.map",
-    "static/css/main.682052b1.chunk.css.map": "/Social_Network/static/css/main.682052b1.chunk.css.map",
+    "static/css/main.02ee9590.chunk.css.map": "/Social_Network/static/css/main.02ee9590.chunk.css.map",
     "static/js/2.9a90a9cb.chunk.js.LICENSE.txt": "/Social_Network/static/js/2.9a90a9cb.chunk.js.LICENSE.txt",
     "static/media/Spotify.c8d377d8.svg": "/Social_Network/static/media/Spotify.c8d377d8.svg",
     "static/media/SpotifyIcon.e4c0ed75.svg": "/Social_Network/static/media/SpotifyIcon.e4c0ed75.svg",
@@ -35,7 +35,7 @@
     "static/js/runtime-main.b539f81b.js",
     "static/css/2.2b8316e7.chunk.css",
     "static/js/2.9a90a9cb.chunk.js",
-    "static/css/main.682052b1.chunk.css",
+    "static/css/main.02ee9590.chunk.css",
     "static/js/main.a9c2450b.chunk.js"
   ]
 }
