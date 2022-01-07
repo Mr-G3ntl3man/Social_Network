@@ -168,7 +168,7 @@
       width: 100px;
       height: 20px;
     }
-    
+
     font-size: 20px;
   }
 }
@@ -182,7 +182,7 @@
   text-align: center;
   flex-direction: column;
   align-items: center;
-  padding: 70px 20px 20px 20px;
+  padding: 20px;
   font-size: 25px;
   font-weight: 500;
   font-family: 'Montserrat', sans-serif;
@@ -217,7 +217,7 @@
   }
 
   p {
-    max-width: 800px;
+    max-width: 1000px;
   }
 
   @media (max-width: 750px) {

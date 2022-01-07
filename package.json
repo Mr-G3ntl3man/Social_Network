@@ -2,7 +2,7 @@
   "name": "social_network",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mrgentelman.github.io/Social_Network/",
+  "homepage": "https://mr-g3ntl3man.github.io/Social_Network/",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@emotion/react": "^11.5.0",
@@ -28,7 +28,7 @@
     "antd": "^4.17.2",
     "axios": "^0.24.0",
     "gh-pages": "^3.2.3",
-    "node-sass": "^4.0.0",
+    "node-sass": "6.0",
     "react": "^17.0.2",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^17.0.2",
