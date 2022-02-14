@@ -1,10 +1,20 @@
-# Social network
+# Social network [Website](https://mr-g3ntl3man.github.io/Social_Network)
 
-[https://mr-g3ntl3man.github.io/Social_Network](https://mr-g3ntl3man.github.io/Social_Network)
+[![Social network banner](src/ui/image/social-network/S_N-Login.png)](https://mr-g3ntl3man.github.io/Social_Network)
 
 ### Social network, project on which a juniors developer trains.
 
-You can search for users, chat, listen to music, edit the profile
+### From the available options:
+
+- The profile that you can edit.
+- View the profiles of other users.
+- Listening to music with Spotify.
+
+## UI Screenshots
+
+![Social network Profile](src/ui/image/social-network/S_N-Profile.png)
+![Social network Music](src/ui/image/social-network/S_N-Music.png)
+![Social network Chat](src/ui/image/social-network/S_N-Chat.png)
 
 ## Stack
 
